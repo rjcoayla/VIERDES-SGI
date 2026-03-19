@@ -532,6 +532,9 @@ nav{flex:1;padding:5px 0;}
   <!-- TOPBAR -->
   <div id="topbar">
     <button class="hbg" onclick="toggleSB()">☰</button>
+    <button class="btn btg bsm" id="btn-back" onclick="goBack()" style="display:none;gap:5px;padding:6px 11px">
+      <span style="font-size:15px;line-height:1">←</span> <span id="btn-back-label">Volver</span>
+    </button>
     <span class="tbt" id="tbt">Dashboard</span>
     <div style="display:flex;align-items:center;gap:7px;margin-left:auto">
       <span class="tbdate" id="tbdate"></span>
@@ -1269,12 +1272,30 @@ function setupRole() {
   }
   navigateTo(r.panels[0]);
   updateSolBadge();
+  // Set home panel for this role and push initial state
+  navHomePanel = r.panels[0];
+  navHistory = [];
+  history.replaceState({ panel: r.panels[0] }, '', '#' + r.panels[0]);
 }
 
 // ═══════════════════════════════════════
 // NAVIGATION
 // ═══════════════════════════════════════
-function navigateTo(p) {
+// ── Navigation history stack ──
+let navHistory = [];
+let navHomePanel = 'dashboard'; // se actualiza según el rol
+
+function navigateTo(p, pushHistory = true) {
+  const currentActive = document.querySelector('.panel.act');
+  const currentPanel = currentActive ? currentActive.id.replace('p-', '') : null;
+
+  // Push to history stack (don't push if same panel or going back)
+  if (pushHistory && currentPanel && currentPanel !== p) {
+    navHistory.push(currentPanel);
+    // Also push browser history state so the phone back button works
+    history.pushState({ panel: p }, '', '#' + p);
+  }
+
   document.querySelectorAll('.ni[data-panel]').forEach(n => n.classList.remove('act'));
   document.querySelectorAll('.panel').forEach(x => x.classList.remove('act'));
   const ni = document.querySelector(`.ni[data-panel="${p}"]`);
@@ -1282,16 +1303,59 @@ function navigateTo(p) {
   const pan = document.getElementById('p-' + p);
   if (pan) pan.classList.add('act');
   document.getElementById('tbt').textContent = PT[p] || p;
+
   if (p === 'dashboard')    renderDash();
   if (p === 'solicitudes')  renderSol();
   if (p === 'actividades')  renderAct();
   if (p === 'personal')     { document.getElementById('att-dp').value = todayStr(); renderPers(); }
   if (p === 'inventario')   renderInv();
   if (p === 'sso')          renderSSO();
+
+  updateBackBtn();
   closeSB();
 }
+
+function goBack() {
+  if (navHistory.length > 0) {
+    const prev = navHistory.pop();
+    navigateTo(prev, false); // false = no volver a agregar al historial
+    history.back();          // sincroniza el historial del browser
+  } else {
+    navigateTo(navHomePanel, false);
+  }
+}
+
+function updateBackBtn() {
+  const btn = document.getElementById('btn-back');
+  const lbl = document.getElementById('btn-back-label');
+  if (!btn) return;
+  const currentPanel = document.querySelector('.panel.act')?.id?.replace('p-', '') || '';
+  const isHome = currentPanel === navHomePanel;
+
+  if (isHome || navHistory.length === 0) {
+    btn.style.display = 'none';
+  } else {
+    btn.style.display = 'flex';
+    const prev = navHistory[navHistory.length - 1];
+    lbl.textContent = PT[prev] || 'Volver';
+  }
+}
+
+// ── Browser/phone back button handler ──
+window.addEventListener('popstate', e => {
+  if (!curRole) return; // not logged in yet
+  if (navHistory.length > 0) {
+    const prev = navHistory.pop();
+    navigateTo(prev, false);
+  } else {
+    navigateTo(navHomePanel, false);
+  }
+});
+
 document.querySelectorAll('.ni[data-panel]').forEach(n => {
-  n.onclick = () => { if (ROLES[curRole].panels.includes(n.dataset.panel)) navigateTo(n.dataset.panel); };
+  n.onclick = () => {
+    if (ROLES[curRole].panels.includes(n.dataset.panel)) navigateTo(n.dataset.panel);
+  };
 });
 document.getElementById('nav-logout').onclick = () => { if (confirm('¿Cerrar sesión?')) location.reload(); };
 
