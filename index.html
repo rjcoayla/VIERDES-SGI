@@ -231,12 +231,26 @@ nav{flex:1;padding:5px 0;}
 .lbx img{max-width:92vw;max-height:86vh;border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,.6);}
 .lbxcl{position:absolute;top:15px;right:15px;background:rgba(0,0,0,.5);border:none;color:#fff;font-size:21px;cursor:pointer;border-radius:50%;width:34px;height:34px;}
 
-.ai{padding:12px 14px;border-bottom:1px solid var(--b1);transition:background var(--tr);}
-.ai:hover{background:var(--s2);}
-.ai:last-child{border-bottom:none;}
-.ait{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px;}
+/* ── Activity cards: full bordered cards ── */
+.ai{
+  background:var(--s1);
+  border:1.5px solid var(--b2);
+  border-radius:8px;
+  padding:13px 14px;
+  margin-bottom:9px;
+  transition:border-color var(--tr),box-shadow var(--tr),background var(--tr);
+  position:relative;
+}
+.ai:hover{border-color:var(--g);box-shadow:0 2px 10px rgba(46,139,53,.12);background:var(--s2);}
+.ai:last-child{margin-bottom:0;}
+/* Left accent by estado */
+.ai::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:8px 0 0 8px;background:var(--b2);}
+.ai.ai-comp::before{background:var(--g);}
+.ai.ai-prog::before{background:var(--bl);}
+.ai.ai-pend::before{background:var(--am);}
+.ait{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:7px;}
 .ain{font-weight:700;font-size:13px;color:var(--wh);line-height:1.3;}
-.aim{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;}
+.aim{display:flex;gap:8px;flex-wrap:wrap;margin-top:5px;}
 .aim span{font-size:10.5px;color:var(--tx2);}
 .aipr{display:flex;align-items:center;gap:8px;}
 .aipc{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;min-width:32px;color:var(--wh);}
@@ -323,6 +337,33 @@ nav{flex:1;padding:5px 0;}
 .ssoi{padding:11px 14px;border-bottom:1px solid var(--b1);transition:background var(--tr);}
 .ssoi:hover{background:var(--s2);}
 .ssoi:last-child{border-bottom:none;}
+
+/* ── Client interaction panel ── */
+.cl-actions{padding:12px 14px;background:linear-gradient(135deg,rgba(46,114,176,.06),rgba(72,184,79,.06));border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);}
+.cl-actions-title{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--tx3);font-weight:700;margin-bottom:9px;}
+.cl-actions-btns{display:flex;gap:7px;flex-wrap:wrap;}
+
+/* Comment thread */
+.comment-thread{padding:11px 14px;}
+.comment-thread-title{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--tx3);font-weight:700;margin-bottom:9px;}
+.comment-item{background:var(--s2);border:1px solid var(--b1);border-radius:6px;padding:9px 11px;margin-bottom:7px;}
+.comment-item:last-child{margin-bottom:0;}
+.comment-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;gap:8px;flex-wrap:wrap;}
+.comment-author{font-size:11px;font-weight:700;color:var(--wh);}
+.comment-date{font-size:10px;color:var(--tx3);}
+.comment-text{font-size:12.5px;color:var(--tx2);line-height:1.55;}
+.comment-tag{font-size:9px;padding:1px 7px;border-radius:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+.ctag-client{background:rgba(46,114,176,.15);color:#60a0d8;border:1px solid rgba(46,114,176,.25);}
+.ctag-vierdes{background:var(--gg);color:var(--gb);border:1px solid rgba(72,184,79,.25);}
+
+/* Reopen request badge */
+.reopen-badge{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;background:rgba(200,135,10,.12);border:1px solid rgba(200,135,10,.3);border-radius:5px;font-size:11.5px;color:var(--am);font-weight:600;margin-bottom:9px;}
+
+/* Rating panel */
+.rating-panel{padding:12px 14px;background:rgba(200,135,10,.06);border-top:1px solid rgba(200,135,10,.15);}
+.rating-panel-title{font-size:11px;color:var(--am);font-weight:700;margin-bottom:8px;}
+.stars-lg .star{font-size:28px;}
+
 
 /* Risk matrix */
 .rmat{display:grid;grid-template-columns:72px repeat(5,1fr);gap:2px;font-size:9px;}
@@ -434,7 +475,7 @@ nav{flex:1;padding:5px 0;}
     </div>
     <nav id="sidenav">
       <div class="ns">Principal</div>
-      <div class="ni act" data-panel="dashboard" data-roles="GERENTE,OPERACIONES,SSO"><span class="niic">📊</span> Dashboard</div>
+      <div class="ni act" data-panel="dashboard" data-roles="GERENTE,OPERACIONES"><span class="niic">📊</span> Dashboard</div>
       <div class="ns">Módulos</div>
       <div class="ni" data-panel="solicitudes" data-roles="GERENTE,CAMPAMENTOS,OPERACIONES,SSO"><span class="niic">📥</span> Solicitudes OT<span class="nbdg" id="sol-badge" style="display:none">0</span></div>
       <div class="ni" data-panel="actividades" data-roles="GERENTE,CAMPAMENTOS,OPERACIONES"><span class="niic">📋</span> Actividades</div>
@@ -687,7 +728,7 @@ nav{flex:1;padding:5px 0;}
     <div class="mh"><span class="mtt">📥 NUEVA SOLICITUD DE TRABAJO</span><button class="mcl" onclick="closeM('ot-new')">✕</button></div>
     <div class="mb">
       <div class="alrg" style="margin-bottom:13px">🌿 Describe el trabajo requerido. VIERDES revisará y confirmará la programación en Campamentos Cuajone.</div>
-      <div class="fg"><label class="fl">Título del trabajo <span class="req">*</span></label><input class="fc" id="ot-tit" placeholder="Ej: Corte de césped frente a viviendas Sector B"></div>
+      <input type="hidden" id="ot-edit-id" value="">
       <div class="fr">
         <div class="fg"><label class="fl">Zona / Ubicación <span class="req">*</span></label>
           <select class="fc" id="ot-zona"><option value="">— Seleccionar —</option><option>Zona Residencial</option><option>Zona Industrial</option><option>Zona de Recreación</option><option>Accesos y Vías</option><option>Sector A</option><option>Sector B</option><option>Sector C</option><option>Club de Golf</option><option>Áreas Comunes</option><option>Otro</option></select>
@@ -893,6 +934,47 @@ nav{flex:1;padding:5px 0;}
   </div>
 </div>
 
+<!-- MODAL: Añadir comentario (cliente y VIERDES) -->
+<div class="mo" id="m-ot-comment">
+  <div class="md" style="max-width:480px">
+    <div class="mh"><span class="mtt">💬 AÑADIR COMENTARIO</span><button class="mcl" onclick="closeM('ot-comment')">✕</button></div>
+    <div class="mb">
+      <input type="hidden" id="cmt-ot-id">
+      <input type="hidden" id="cmt-autor">
+      <input type="hidden" id="cmt-author">
+      <input type="hidden" id="cmt-tipo">
+      <div class="alrb" style="margin-bottom:13px">💬 Tu comentario será visible tanto para VIERDES como para el cliente SPCC. Úsalo para consultas, aclaraciones o seguimiento del trabajo.</div>
+      <div class="fg">
+        <label class="fl">Mensaje / Observación</label>
+        <textarea class="fc" id="cmt-texto" rows="4" placeholder="Escribe tu comentario, pregunta o aclaración sobre este trabajo..."></textarea>
+      </div>
+    </div>
+    <div class="mf">
+      <button class="btn btg" onclick="closeM('ot-comment')">Cancelar</button>
+      <button class="btn btp" onclick="saveComment()">💬 Publicar comentario</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Solicitar reapertura (cliente) -->
+<div class="mo" id="m-ot-reopen">
+  <div class="md" style="max-width:480px">
+    <div class="mh"><span class="mtt">🔄 SOLICITAR REAPERTURA</span><button class="mcl" onclick="closeM('ot-reopen')">✕</button></div>
+    <div class="mb">
+      <input type="hidden" id="reo-ot-id">
+      <div class="alra" style="margin-bottom:13px">⚠️ La reapertura indica que el trabajo no fue completado a tu satisfacción. VIERDES evaluará tu solicitud y decidirá si retomar el trabajo.</div>
+      <div class="fg">
+        <label class="fl">Motivo de la reapertura <span class="req">*</span></label>
+        <textarea class="fc" id="reo-motivo" rows="4" placeholder="Describe qué aspectos del trabajo quedaron incompletos o no fueron realizados según lo solicitado..."></textarea>
+      </div>
+    </div>
+    <div class="mf">
+      <button class="btn btg" onclick="closeM('ot-reopen')">Cancelar</button>
+      <button class="btn bta" onclick="saveReopen()">🔄 Enviar solicitud de reapertura</button>
+    </div>
+  </div>
+</div>
+
 <!-- EXPORT -->
 <div class="mo" id="m-export">
   <div class="md" style="max-width:490px"><div class="mh"><span class="mtt">⬇ EXPORTAR REPORTES</span><button class="mcl" onclick="closeM('export')">✕</button></div>
@@ -978,10 +1060,10 @@ const sv = (k,d) => localStorage.setItem(K[k], JSON.stringify(d));
 // ═══════════════════════════════════════
 function initData() {
   if (!ld('sol').length) sv('sol', [
-    {id:1,folio:'OT-001',titulo:'Corte de césped frente a viviendas Sector B',zona:'Sector B',tipo:'Corte de césped',desc:'El césped en el sector residencial B lleva más de 3 semanas sin mantenimiento. Crecimiento excesivo frente a las viviendas 45–68.',prio:'Alta',fechaDes:'2025-03-22',sol:'Ing. Marco Salas',tel:'956 100 200',fechaSol:'2025-03-14',fotosAntes:[],estado:'Completada',fechaRev:'2025-03-15',revPor:'Sup. Operaciones',comentRev:'Aprobado. Cuadrilla asignada para el 22/03.',fechaProg:'2025-03-22',equipo:'José Quispe + 2 operarios',recursos:'Motosegadora, rastrillo',obsProg:'~4 horas',fechaIni:'2025-03-22',avance:100,fechaComp:'2025-03-22',horas:4.5,personal:'José Quispe, María Flores, Carlos Huanca',obsClose:'Corte completo. Área en óptimas condiciones.',fotosDesp:[],calificacion:5,comentCliente:'Excelente trabajo, muy puntual.',fechaCal:'2025-03-23'},
-    {id:2,folio:'OT-002',titulo:'Poda de árboles en acceso principal — ramas secas peligrosas',zona:'Accesos y Vías',tipo:'Poda de árboles / arbustos',desc:'Dos eucaliptos presentan ramas secas de gran tamaño. Riesgo de caída sobre vehículos.',prio:'Urgente',fechaDes:'2025-03-18',sol:'Lic. Carmen Huanca',tel:'956 200 300',fechaSol:'2025-03-13',fotosAntes:[],estado:'En ejecución',fechaRev:'2025-03-14',revPor:'Sup. Operaciones',comentRev:'Aprobado. Riesgo confirmado en inspección.',fechaProg:'2025-03-18',equipo:'Luis Cutipa + técnico',recursos:'Arnés, motosierra, camión',obsProg:'PETAR obligatorio. ~6h',fechaIni:'2025-03-18',avance:60,fechaComp:'',horas:0,personal:'',obsClose:'',fotosDesp:[],calificacion:0,comentCliente:'',fechaCal:''},
-    {id:3,folio:'OT-003',titulo:'Fertilización jardines Club de Recreación',zona:'Club de Golf',tipo:'Fertilización',desc:'Manchas amarillas y zonas sin cobertura. Solicita fertilización y resembrado.',prio:'Normal',fechaDes:'2025-03-28',sol:'Arq. Luis Torres',tel:'956 300 400',fechaSol:'2025-03-17',fotosAntes:[],estado:'Aprobada',fechaRev:'2025-03-18',revPor:'Sup. Operaciones',comentRev:'Aprobado. Verificar stock NPK.',fechaProg:'',equipo:'',recursos:'',obsProg:'',fechaIni:'',avance:0,fechaComp:'',horas:0,personal:'',obsClose:'',fotosDesp:[],calificacion:0,comentCliente:'',fechaCal:''},
-    {id:4,folio:'OT-004',titulo:'Reparación aspersores rotos — Zona Residencial',zona:'Zona Residencial',tipo:'Reparación sistema riego',desc:'3 aspersores rotos y tubería con fuga en calle Los Pinos. Riego irregular, charcos en la vía.',prio:'Alta',fechaDes:'2025-03-20',sol:'Ing. Pedro Cáceres',tel:'956 400 500',fechaSol:'2025-03-16',fotosAntes:[],estado:'Pendiente',fechaRev:'',revPor:'',comentRev:'',fechaProg:'',equipo:'',recursos:'',obsProg:'',fechaIni:'',avance:0,fechaComp:'',horas:0,personal:'',obsClose:'',fotosDesp:[],calificacion:0,comentCliente:'',fechaCal:''}
+    {id:1,folio:'OT-001',titulo:'Corte de césped frente a viviendas Sector B',zona:'Sector B',tipo:'Corte de césped',desc:'El césped en el sector residencial B lleva más de 3 semanas sin mantenimiento. Crecimiento excesivo frente a las viviendas 45–68.',prio:'Alta',fechaDes:'2025-03-22',sol:'Ing. Marco Salas',tel:'956 100 200',fechaSol:'2025-03-14',fotosAntes:[],estado:'Completada',fechaRev:'2025-03-15',revPor:'Sup. Operaciones',comentRev:'Aprobado. Cuadrilla asignada para el 22/03.',fechaProg:'2025-03-22',equipo:'José Quispe + 2 operarios',recursos:'Motosegadora, rastrillo',obsProg:'~4 horas',fechaIni:'2025-03-22',avance:100,fechaComp:'2025-03-22',horas:4.5,personal:'José Quispe, María Flores, Carlos Huanca',obsClose:'Corte completo. Área en óptimas condiciones.',fotosDesp:[],calificacion:5,comentCliente:'Excelente trabajo, muy puntual.',fechaCal:'2025-03-23',comentarios:[{autor:'Campamentos SPCC',fecha:'2025-03-20',texto:'¿Pueden confirmar que incluirá también el retiro de maleza en los bordes?',tipo:'cliente'},{autor:'Sup. Operaciones',fecha:'2025-03-20',texto:'Confirmado, se realizará limpieza completa incluyendo bordes y cunetas.',tipo:'vierdes'}],reaperturaActiva:false,motivoReapertura:'',fechaReapertura:''},
+    {id:2,folio:'OT-002',titulo:'Poda de árboles en acceso principal — ramas secas peligrosas',zona:'Accesos y Vías',tipo:'Poda de árboles / arbustos',desc:'Dos eucaliptos presentan ramas secas de gran tamaño. Riesgo de caída sobre vehículos.',prio:'Urgente',fechaDes:'2025-03-18',sol:'Lic. Carmen Huanca',tel:'956 200 300',fechaSol:'2025-03-13',fotosAntes:[],estado:'En ejecución',fechaRev:'2025-03-14',revPor:'Sup. Operaciones',comentRev:'Aprobado. Riesgo confirmado en inspección.',fechaProg:'2025-03-18',equipo:'Luis Cutipa + técnico',recursos:'Arnés, motosierra, camión',obsProg:'PETAR obligatorio. ~6h',fechaIni:'2025-03-18',avance:60,fechaComp:'',horas:0,personal:'',obsClose:'',fotosDesp:[],calificacion:0,comentCliente:'',fechaCal:'',comentarios:[{autor:'Campamentos SPCC',fecha:'2025-03-18',texto:'Por favor asegúrense de señalizar bien el área mientras dure el trabajo, hay paso peatonal.',tipo:'cliente'}],reaperturaActiva:false,motivoReapertura:'',fechaReapertura:''},
+    {id:3,folio:'OT-003',titulo:'Fertilización jardines Club de Recreación',zona:'Club de Golf',tipo:'Fertilización',desc:'Manchas amarillas y zonas sin cobertura. Solicita fertilización y resembrado.',prio:'Normal',fechaDes:'2025-03-28',sol:'Arq. Luis Torres',tel:'956 300 400',fechaSol:'2025-03-17',fotosAntes:[],estado:'Aprobada',fechaRev:'2025-03-18',revPor:'Sup. Operaciones',comentRev:'Aprobado. Verificar stock NPK.',fechaProg:'',equipo:'',recursos:'',obsProg:'',fechaIni:'',avance:0,fechaComp:'',horas:0,personal:'',obsClose:'',fotosDesp:[],calificacion:0,comentCliente:'',fechaCal:'',comentarios:[],reaperturaActiva:false,motivoReapertura:'',fechaReapertura:''},
+    {id:4,folio:'OT-004',titulo:'Reparación aspersores rotos — Zona Residencial',zona:'Zona Residencial',tipo:'Reparación sistema riego',desc:'3 aspersores rotos y tubería con fuga en calle Los Pinos. Riego irregular, charcos en la vía.',prio:'Alta',fechaDes:'2025-03-20',sol:'Ing. Pedro Cáceres',tel:'956 400 500',fechaSol:'2025-03-16',fotosAntes:[],estado:'Pendiente',fechaRev:'',revPor:'',comentRev:'',fechaProg:'',equipo:'',recursos:'',obsProg:'',fechaIni:'',avance:0,fechaComp:'',horas:0,personal:'',obsClose:'',fotosDesp:[],calificacion:0,comentCliente:'',fechaCal:'',comentarios:[],reaperturaActiva:false,motivoReapertura:'',fechaReapertura:''}
   ]);
   if (!ld('act').length) sv('act', [
     {id:1,nombre:'Corte de césped — Zona Industrial',zona:'Zona Industrial',estado:'En progreso',inicio:'2025-03-01',fin:'2025-03-31',pct:65,resp:'José Quispe',photos:[]},
@@ -1228,6 +1310,8 @@ function buildOTCard(ot, isClient, isGerente, canManage, canRate) {
   const idx = OT_STEPS.indexOf(ot.estado);
   const isComp = ot.estado === 'Completada';
   const isRej = ot.estado === 'Rechazada';
+  const isEjec = ot.estado === 'En ejecución';
+  const isPend = ot.estado === 'Pendiente';
 
   // Stepper
   let stepper = isRej
@@ -1238,7 +1322,7 @@ function buildOTCard(ot, isClient, isGerente, canManage, canRate) {
         return i < OT_STEPS.length - 1 ? dot + `<div class="stln ${i < idx ? 'done' : ''}"></div>` : dot;
       }).join('') + '</div>';
 
-  // Photos section
+  // Photos
   const bPh = ot.fotosAntes && ot.fotosAntes.length
     ? ot.fotosAntes.slice(0, 4).map(s => `<img class="pth" src="${s}" onclick="lbx('${s}')" style="width:60px;height:48px">`).join('')
     : `<span style="font-size:11px;color:var(--tx3);padding:8px">Sin fotos adjuntas</span>`;
@@ -1246,6 +1330,7 @@ function buildOTCard(ot, isClient, isGerente, canManage, canRate) {
     ? ot.fotosDesp.slice(0, 4).map(s => `<img class="pth" src="${s}" onclick="lbx('${s}')" style="width:60px;height:48px">`).join('')
     : `<span style="font-size:11px;color:var(--tx3);padding:8px">Sin fotos de cierre</span>`;
 
+  // ── Evidence / progress section ──
   let evidence = '';
   if (isComp) {
     evidence = `
@@ -1260,18 +1345,89 @@ function buildOTCard(ot, isClient, isGerente, canManage, canRate) {
       </div>
       ${ot.obsClose ? `<div style="font-size:12px;color:var(--tx2);padding:9px;background:var(--gg);border:1px solid rgba(72,184,79,.2);border-radius:5px;margin-bottom:9px">📝 ${ot.obsClose}</div>` : ''}
       ${ot.fechaDes && ot.fechaComp ? `<div style="margin-bottom:9px"><span class="bdg ${ot.fechaComp <= ot.fechaDes ? 'bg' : 'br'}">${ot.fechaComp <= ot.fechaDes ? '✓ Entregado a tiempo' : '⚠ ' + diffD(ot.fechaDes, ot.fechaComp) + 'd de retraso'}</span></div>` : ''}
-      ${(canRate && !ot.calificacion) ? `<div style="margin-top:8px;padding:10px;background:var(--s2);border:1px solid var(--b1);border-radius:5px"><div style="font-size:11px;color:var(--tx2);margin-bottom:6px">⭐ ¿Cómo calificarías este trabajo?</div><div class="stars" id="st-${ot.id}">${[1,2,3,4,5].map(n=>`<span class="star" onclick="rateOT(${ot.id},${n})" onmouseover="hvSt(${ot.id},${n})" onmouseout="uhvSt(${ot.id})">★</span>`).join('')}</div></div>` : ''}
-      ${ot.calificacion ? `<div style="padding:9px;background:var(--ad);border:1px solid rgba(200,135,10,.2);border-radius:5px"><div style="font-size:10px;color:var(--tx3);margin-bottom:3px;text-transform:uppercase;letter-spacing:1px">Calificación del cliente</div><div style="color:var(--am);font-size:18px;letter-spacing:2px">${'★'.repeat(ot.calificacion)}${'☆'.repeat(5-ot.calificacion)}</div>${ot.comentCliente ? `<div style="font-size:11.5px;color:var(--tx2);margin-top:3px">"${ot.comentCliente}"</div>` : ''}</div>` : ''}
     `;
   } else {
-    evidence = ot.fotosAntes && ot.fotosAntes.length
-      ? `<div style="margin-bottom:8px"><div style="font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--tx3);margin-bottom:5px;font-weight:700">📷 Fotos de referencia (antes)</div><div style="display:flex;gap:5px;flex-wrap:wrap">${bPh}</div></div>` : '';
-    if (ot.avance > 0 && !isComp) {
-      evidence += `<div style="margin-bottom:8px"><div style="font-size:9.5px;color:var(--tx2);margin-bottom:4px">Avance actual: <strong style="color:var(--wh)">${ot.avance}%</strong></div><div class="pbar"><div class="pf ${ot.avance>=100?'pfg':ot.avance>=50?'pfa':'pfr'}" style="width:${ot.avance}%"></div></div></div>`;
+    if (ot.fotosAntes && ot.fotosAntes.length)
+      evidence += `<div style="margin-bottom:8px"><div style="font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--tx3);margin-bottom:5px;font-weight:700">📷 Fotos de referencia (antes)</div><div style="display:flex;gap:5px;flex-wrap:wrap">${bPh}</div></div>`;
+    if (ot.avance > 0)
+      evidence += `<div style="margin-bottom:8px"><div style="font-size:9.5px;color:var(--tx2);margin-bottom:4px">Avance actual: <strong style="color:var(--wh)">${ot.avance}%</strong>${ot.fechaProg?` · Programado para: <strong style="color:var(--wh)">${fd(ot.fechaProg)}</strong>`:''}</div><div class="pbar"><div class="pf ${ot.avance>=100?'pfg':ot.avance>=50?'pfa':'pfr'}" style="width:${ot.avance}%"></div></div></div>`;
+  }
+
+  // ── Reopen request indicator ──
+  let reopenBadge = '';
+  if (ot.reaperturaActiva) {
+    reopenBadge = `<div class="reopen-badge">🔄 Reapertura solicitada por SPCC — <em>${ot.motivoReapertura}</em></div>`;
+  }
+
+  // ── Comment thread (visible to everyone) ──
+  let commentThread = '';
+  const comentarios = ot.comentarios || [];
+  if (comentarios.length > 0 || isComp || isEjec) {
+    const items = comentarios.map(c => `
+      <div class="comment-item">
+        <div class="comment-meta">
+          <div style="display:flex;align-items:center;gap:7px">
+            <span class="comment-author">${c.tipo === 'cliente' ? '⛺' : '🌿'} ${c.autor}</span>
+            <span class="comment-tag ${c.tipo === 'cliente' ? 'ctag-client' : 'ctag-vierdes'}">${c.tipo === 'cliente' ? 'SPCC' : 'VIERDES'}</span>
+          </div>
+          <span class="comment-date">${c.fecha}</span>
+        </div>
+        <div class="comment-text">${c.texto}</div>
+      </div>`).join('');
+    commentThread = `<div class="comment-thread">
+      <div class="comment-thread-title">💬 Comunicaciones</div>
+      ${items}
+    </div>`;
+  }
+
+  // ── Rating panel (client: always visible when completed) ──
+  let ratingPanel = '';
+  if (isComp) {
+    if (canRate && !ot.calificacion) {
+      ratingPanel = `<div class="rating-panel">
+        <div class="rating-panel-title">⭐ Califica el trabajo realizado por VIERDES</div>
+        <p style="font-size:11.5px;color:var(--tx2);margin-bottom:9px">Tu calificación ayuda a medir el cumplimiento y la calidad del servicio.</p>
+        <div class="stars stars-lg" id="st-${ot.id}">${[1,2,3,4,5].map(n=>`<span class="star" onclick="rateOT(${ot.id},${n})" onmouseover="hvSt(${ot.id},${n})" onmouseout="uhvSt(${ot.id})">★</span>`).join('')}</div>
+      </div>`;
+    } else if (ot.calificacion) {
+      ratingPanel = `<div class="rating-panel">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+          <div>
+            <div class="rating-panel-title" style="margin-bottom:5px">⭐ Calificación del cliente SPCC</div>
+            <div style="color:var(--am);font-size:22px;letter-spacing:3px">${'★'.repeat(ot.calificacion)}${'☆'.repeat(5-ot.calificacion)}</div>
+            ${ot.comentCliente ? `<div style="font-size:12px;color:var(--tx2);margin-top:5px;font-style:italic">"${ot.comentCliente}"</div>` : ''}
+            <div style="font-size:10px;color:var(--tx3);margin-top:3px">Calificado el ${ot.fechaCal}</div>
+          </div>
+          ${canRate ? `<button class="btn btg bsm" onclick="rateOT(${ot.id},0)">✏️ Modificar</button>` : ''}
+        </div>
+      </div>`;
     }
   }
 
-  // Action buttons — OPERACIONES es el único que puede gestionar el flujo
+  // ── Action buttons ──
+  let clientActions = '';
+  if (isClient) {
+    const btnsClient = [];
+    // Can always comment if not rejected/completed-and-rated
+    if (!isRej)
+      btnsClient.push(`<button class="btn btb bsm" onclick="openComment(${ot.id})">💬 Añadir comentario</button>`);
+    // Can reopen if completed and not already requesting
+    if (isComp && !ot.reaperturaActiva)
+      btnsClient.push(`<button class="btn bta bsm" onclick="openReopen(${ot.id})">🔄 Solicitar reapertura</button>`);
+    // Can cancel reopen if active
+    if (ot.reaperturaActiva)
+      btnsClient.push(`<button class="btn btg bsm" onclick="cancelReopen(${ot.id})">✕ Cancelar reapertura</button>`);
+    // Can edit if still pending
+    if (isPend)
+      btnsClient.push(`<button class="btn btg bsm" onclick="editOT(${ot.id})">✏️ Editar solicitud</button>`);
+    clientActions = btnsClient.length ? `
+      <div class="cl-actions">
+        <div class="cl-actions-title">Acciones del Cliente SPCC</div>
+        <div class="cl-actions-btns">${btnsClient.join('')}</div>
+      </div>` : '';
+  }
+
+  // VIERDES action buttons
   let btns = '';
   if (canManage) {
     if (ot.estado === 'Pendiente')
@@ -1283,12 +1439,16 @@ function buildOTCard(ot, isClient, isGerente, canManage, canRate) {
     else if (ot.estado === 'Programada')
       btns = `<button class="btn btp bsm" onclick="startExec(${ot.id})">▶ Iniciar ejecución</button>`;
     else if (ot.estado === 'En ejecución')
-      btns = `<button class="btn bta bsm" onclick="updPct(${ot.id})">📊 Actualizar avance</button><button class="btn btp bsm" onclick="openCierre(${ot.id})">✅ Registrar cierre</button>`;
-    if (!isComp && ot.estado !== 'Rechazada')
+      btns = `<button class="btn bta bsm" onclick="updPct(${ot.id})">📊 Avance</button><button class="btn btp bsm" onclick="openCierre(${ot.id})">✅ Registrar cierre</button><button class="btn btb bsm" onclick="openComment(${ot.id})">💬 Comentar</button>`;
+    else if (isComp && ot.reaperturaActiva)
+      btns = `<button class="btn bta bsm" onclick="processReopen(${ot.id})">🔄 Atender reapertura</button>`;
+    if (!isComp && !isRej)
       btns += ` <button class="btn btg bxs" onclick="delOT(${ot.id})">🗑</button>`;
-  } else if (!isClient && !canManage) {
-    // Gerente y SSO solo ven
+  } else if (!isClient) {
+    // Gerente y SSO: solo ven
     btns = `<button class="btn btg bsm" onclick="viewOT(${ot.id})">👁 Ver detalle</button>`;
+    if (canRate && isComp && !ot.calificacion)
+      btns += ` <button class="btn bta bsm" onclick="openRatingModal(${ot.id})">⭐ Calificar</button>`;
   }
 
   return `<div class="otcard">
@@ -1298,13 +1458,20 @@ function buildOTCard(ot, isClient, isGerente, canManage, canRate) {
         <div class="otit">${ot.titulo}</div>
         <div class="otm"><span>📍 ${ot.zona}</span><span>🔧 ${ot.tipo}</span><span class="${pCls}">🔺 ${ot.prio}</span><span>📅 Deseado: ${fd(ot.fechaDes)}</span>${ot.fechaProg ? `<span>🗓 Prog: ${fd(ot.fechaProg)}</span>` : ''}</div>
       </div>
-      <div class="otr"><span class="bdg ${bc}">${ot.estado}</span></div>
+      <div class="otr">
+        <span class="bdg ${bc}">${ot.estado}</span>
+        ${comentarios.length > 0 ? `<span style="font-size:10px;color:var(--bl)">💬 ${comentarios.length}</span>` : ''}
+      </div>
     </div>
     ${stepper}
     <div class="otb">
+      ${reopenBadge}
       ${ot.desc ? `<div class="otd">${ot.desc}</div>` : ''}
       ${evidence}
     </div>
+    ${commentThread}
+    ${ratingPanel}
+    ${clientActions}
     <div class="otft">
       <div class="otfti">👤 ${ot.sol || '—'} ${ot.tel ? '· ' + ot.tel : ''} ${ot.equipo ? ' &nbsp;|&nbsp; 👷 ' + ot.equipo : ''}</div>
       <div style="display:flex;gap:5px">${btns}</div>
@@ -1320,7 +1487,24 @@ function saveOT() {
   if (!tit) { toast('Ingresa el título del trabajo', 'a'); return; }
   if (!zona) { toast('Selecciona la zona', 'a'); return; }
   if (!fecha) { toast('Indica la fecha deseada', 'a'); return; }
+  const editId = parseInt(document.getElementById('ot-edit-id')?.value || 0);
   const sols = ld('sol');
+  if (editId) {
+    const i = sols.findIndex(x => x.id === editId);
+    if (i >= 0) {
+      sols[i].titulo = tit; sols[i].zona = zona;
+      sols[i].tipo = document.getElementById('ot-tipo').value;
+      sols[i].desc = document.getElementById('ot-desc').value;
+      sols[i].fechaDes = fecha; sols[i].prio = document.getElementById('ot-prio').value;
+      sols[i].sol = document.getElementById('ot-sol').value;
+      sols[i].tel = document.getElementById('ot-tel').value;
+      if (PH.new.length) sols[i].fotosAntes = [...PH.new];
+      sv('sol', sols);
+      const eid = document.getElementById('ot-edit-id'); if(eid) eid.value = '';
+      rphx('new'); closeM('ot-new'); renderSol(); toast('Solicitud actualizada');
+    }
+    return;
+  }
   const n = sols.length > 0 ? Math.max(...sols.map(x => parseInt(x.folio.split('-')[1] || 0))) + 1 : 1;
   sols.unshift({
     id: Date.now(), folio: 'OT-' + String(n).padStart(3, '0'),
@@ -1332,7 +1516,9 @@ function saveOT() {
     fotosAntes: [...PH.new], estado: 'Pendiente',
     fechaRev:'',revPor:'',comentRev:'',fechaProg:'',equipo:'',recursos:'',obsProg:'',
     fechaIni:'',avance:0,fechaComp:'',horas:0,personal:'',obsClose:'',fotosDesp:[],
-    calificacion:0,comentCliente:'',fechaCal:''
+    calificacion:0,comentCliente:'',fechaCal:'',
+    comentarios:[],
+    reaperturaActiva:false,motivoReapertura:'',fechaReapertura:''
   });
   sv('sol', sols);
   rphx('new'); ['ot-tit','ot-desc','ot-sol','ot-tel','ot-fecha'].forEach(id => { const e = document.getElementById(id); if (e) e.value = ''; });
@@ -1454,14 +1640,108 @@ function delOT(id) {
 }
 
 // ─── Rating ───
-function rateOT(id,stars) {
-  const com=prompt('Comentario opcional (Enter para omitir):');
-  const s=ld('sol'); const i=s.findIndex(x=>x.id===id);
-  s[i].calificacion=stars; s[i].comentCliente=com||''; s[i].fechaCal=todayStr();
-  sv('sol',s); renderSol(); toast('¡Gracias por tu calificación!');
+function rateOT(id, stars) {
+  if (stars === 0) {
+    // Reset rating to allow re-rating
+    const s = ld('sol'); const i = s.findIndex(x => x.id === id);
+    s[i].calificacion = 0; s[i].comentCliente = ''; s[i].fechaCal = '';
+    sv('sol', s); renderSol(); return;
+  }
+  const com = prompt('Deja un comentario sobre el trabajo (opcional, Enter para omitir):');
+  const s = ld('sol'); const i = s.findIndex(x => x.id === id);
+  s[i].calificacion = stars; s[i].comentCliente = com || ''; s[i].fechaCal = todayStr();
+  sv('sol', s); renderSol(); toast('¡Gracias por tu calificación!');
 }
+function openRatingModal(id) { rateOT(id, 0); renderSol(); }
 function hvSt(id,n){document.querySelectorAll(`#st-${id} .star`).forEach((s,i)=>s.classList.toggle('hv',i<n));}
 function uhvSt(id){document.querySelectorAll(`#st-${id} .star`).forEach(s=>s.classList.remove('hv'));}
+
+// ─── Client: Add comment ───
+function openComment(id) {
+  document.getElementById('cmt-ot-id').value = id;
+  document.getElementById('cmt-texto').value = '';
+  const isClient = curRole === 'CAMPAMENTOS';
+  document.getElementById('cmt-author').value = isClient ? 'Campamentos SPCC' : ROLES[curRole].label;
+  document.getElementById('cmt-tipo').value = isClient ? 'cliente' : 'vierdes';
+  openM('ot-comment');
+}
+function saveComment() {
+  const id = parseInt(document.getElementById('cmt-ot-id').value);
+  const texto = document.getElementById('cmt-texto').value.trim();
+  if (!texto) { toast('Escribe un comentario', 'a'); return; }
+  const s = ld('sol'); const i = s.findIndex(x => x.id === id);
+  if (!s[i].comentarios) s[i].comentarios = [];
+  s[i].comentarios.push({
+    autor: document.getElementById('cmt-author').value,
+    fecha: todayStr(),
+    texto,
+    tipo: document.getElementById('cmt-tipo').value
+  });
+  sv('sol', s); closeM('ot-comment'); renderSol(); toast('Comentario registrado');
+}
+
+// ─── Client: Edit OT (only Pendiente) ───
+function editOT(id) {
+  const ot = ld('sol').find(x => x.id === id); if (!ot || ot.estado !== 'Pendiente') return;
+  document.getElementById('ot-tit').value = ot.titulo;
+  document.getElementById('ot-zona').value = ot.zona;
+  document.getElementById('ot-tipo').value = ot.tipo;
+  document.getElementById('ot-desc').value = ot.desc;
+  document.getElementById('ot-fecha').value = ot.fechaDes;
+  document.getElementById('ot-prio').value = ot.prio;
+  document.getElementById('ot-sol').value = ot.sol;
+  document.getElementById('ot-tel').value = ot.tel;
+  PH.new = [...(ot.fotosAntes || [])];
+  rph('new');
+  // Store edit id
+  document.getElementById('ot-edit-id').value = id;
+  openM('ot-new');
+}
+
+// ─── Client: Reopen request ───
+function openReopen(id) {
+  document.getElementById('reo-ot-id').value = id;
+  document.getElementById('reo-motivo').value = '';
+  openM('ot-reopen');
+}
+function saveReopen() {
+  const id = parseInt(document.getElementById('reo-ot-id').value);
+  const motivo = document.getElementById('reo-motivo').value.trim();
+  if (!motivo) { toast('Explica el motivo de la reapertura', 'a'); return; }
+  const s = ld('sol'); const i = s.findIndex(x => x.id === id);
+  s[i].reaperturaActiva = true;
+  s[i].motivoReapertura = motivo;
+  s[i].fechaReapertura = todayStr();
+  // Add as comment too
+  if (!s[i].comentarios) s[i].comentarios = [];
+  s[i].comentarios.push({ autor:'Campamentos SPCC', fecha:todayStr(), texto:'🔄 Solicitud de reapertura: '+motivo, tipo:'cliente' });
+  sv('sol', s); closeM('ot-reopen'); renderSol(); toast('Reapertura solicitada — VIERDES fue notificado', 'a');
+}
+function cancelReopen(id) {
+  if (!confirm('¿Cancelar la solicitud de reapertura?')) return;
+  const s = ld('sol'); const i = s.findIndex(x => x.id === id);
+  s[i].reaperturaActiva = false; s[i].motivoReapertura = ''; s[i].fechaReapertura = '';
+  sv('sol', s); renderSol(); toast('Solicitud de reapertura cancelada');
+}
+function processReopen(id) {
+  // OPERACIONES: can accept (reopen to In Execution) or close the request
+  const ot = ld('sol').find(x => x.id === id); if (!ot) return;
+  const action = confirm(`Reapertura solicitada por SPCC:\n"${ot.motivoReapertura}"\n\nAceptar: La OT vuelve a "En ejecución"\nCancelar: Rechazar la reapertura`);
+  const s = ld('sol'); const i = s.findIndex(x => x.id === id);
+  if (action) {
+    s[i].estado = 'En ejecución';
+    s[i].reaperturaActiva = false;
+    s[i].fechaComp = ''; s[i].fotosDesp = [];
+    if (!s[i].comentarios) s[i].comentarios = [];
+    s[i].comentarios.push({ autor: ROLES[curRole].label, fecha:todayStr(), texto:'✅ Reapertura aceptada. OT devuelta a ejecución para completar los pendientes solicitados.', tipo:'vierdes' });
+    sv('sol', s); renderSol(); toast('OT reabierta — en ejecución nuevamente');
+  } else {
+    s[i].reaperturaActiva = false;
+    if (!s[i].comentarios) s[i].comentarios = [];
+    s[i].comentarios.push({ autor: ROLES[curRole].label, fecha:todayStr(), texto:'❌ Reapertura rechazada. El trabajo se considera completado conforme a lo acordado.', tipo:'vierdes' });
+    sv('sol', s); renderSol(); toast('Reapertura rechazada', 'r');
+  }
+}
 
 // ─── Compliance ───
 function renderCompliance(sols) {
