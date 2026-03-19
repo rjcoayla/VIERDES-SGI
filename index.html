@@ -447,6 +447,33 @@ nav{flex:1;padding:5px 0;}
 .rating-panel{padding:12px 14px;background:rgba(200,135,10,.06);border-top:1px solid rgba(200,135,10,.15);}
 .rating-panel-title{font-size:11px;color:var(--am);font-weight:700;margin-bottom:8px;}
 .stars-lg .star{font-size:28px;}
+
+/* ── VIERDES logo style: VIER oscuro + DES verde ── */
+.brand-vier{font-family:'Bebas Neue',sans-serif;letter-spacing:2.5px;color:var(--wh);font-size:21px;line-height:1;display:inline;}
+.brand-des{font-family:'Bebas Neue',sans-serif;letter-spacing:2.5px;color:var(--gb);font-size:21px;line-height:1;display:inline;}
+.login-vier{font-family:'Bebas Neue',sans-serif;letter-spacing:4px;color:var(--wh);font-size:38px;line-height:1;display:inline;}
+.login-des{font-family:'Bebas Neue',sans-serif;letter-spacing:4px;color:var(--gb);font-size:38px;line-height:1;display:inline;}
+
+/* ── IPERC matrix VIERDES — colores por rango de valor ── */
+.vmat{display:grid;grid-template-columns:90px repeat(5,1fr);gap:2px;font-size:10px;}
+.vmat-h{background:var(--s2);padding:6px 4px;text-align:center;font-weight:700;color:var(--tx2);border-radius:3px;font-size:8.5px;line-height:1.3;}
+.vmat-hl{background:var(--s2);padding:7px 6px;display:flex;align-items:center;font-weight:600;color:var(--tx2);border-radius:3px;font-size:8.5px;line-height:1.2;}
+.vmat-c{padding:9px 4px;text-align:center;border-radius:3px;font-weight:800;font-size:12px;cursor:default;}
+/* Rojo: Intolerable (1–9) */
+[data-theme="dark"]  .vc-r{background:#420606;color:#ff5555;}
+[data-theme="light"] .vc-r{background:#ffc8c8;color:#8a0000;}
+/* Naranja: Importante (10–14) */
+[data-theme="dark"]  .vc-o{background:#3c1e04;color:#ff8830;}
+[data-theme="light"] .vc-o{background:#fdddb0;color:#7a3000;}
+/* Amarillo: Moderado (15–19) */
+[data-theme="dark"]  .vc-y{background:#342c02;color:#f0cc20;}
+[data-theme="light"] .vc-y{background:#fdf4a0;color:#605800;}
+/* Verde claro: Tolerable (20–22) */
+[data-theme="dark"]  .vc-g{background:#0c3010;color:#70d050;}
+[data-theme="light"] .vc-g{background:#c0f0b0;color:#1a6010;}
+/* Verde oscuro: Aceptable (23–25) */
+[data-theme="dark"]  .vc-a{background:#0a4010;color:#40ee40;}
+[data-theme="light"] .vc-a{background:#90e890;color:#0a3808;}
 @media(max-width:768px){
   #sb{transform:translateX(-100%);}
   body.sbo #sb{transform:translateX(0);box-shadow:4px 0 22px rgba(0,0,0,.4);}
@@ -469,7 +496,7 @@ nav{flex:1;padding:5px 0;}
   <div class="lw">
     <div class="lb">
       <div class="lf">🌿</div>
-      <div class="lt">VIERDES SAC</div>
+      <div class="lt" style="letter-spacing:0"><span class="login-vier">VIER</span><span class="login-des">DES</span> <span style="font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:4px;color:var(--wh)">SAC</span></div>
       <div class="ls">Sistema de Gestión Integral</div>
       <span class="lbdg">📍 Mina Cuajone · Campamentos · Moquegua</span>
     </div>
@@ -503,7 +530,10 @@ nav{flex:1;padding:5px 0;}
     <div class="sbb">
       <div class="sbr">
         <div class="sbf">🌿</div>
-        <div><div class="sbt">VIERDES</div><div class="sbs">SAC · Áreas Verdes</div></div>
+        <div>
+          <div><span class="brand-vier">VIER</span><span class="brand-des">DES</span></div>
+          <div class="sbs">SAC · Áreas Verdes</div>
+        </div>
       </div>
     </div>
     <div class="uc">
@@ -749,31 +779,37 @@ nav{flex:1;padding:5px 0;}
         <div class="card" style="margin-top:14px">
           <div class="ch"><span class="ct">Matriz IPERC — Referencia Rápida</span></div>
           <div class="cb">
-            <p style="font-size:9px;color:var(--tx3);margin-bottom:9px">SEVERIDAD (1–5) → / PROBABILIDAD (1–5) ↓ &nbsp;·&nbsp; Nivel de Riesgo = Probabilidad × Severidad</p>
-            <div class="rmat">
-              <div class="rh"></div>
-              <div class="rh">1<br><span style="font-weight:400;font-size:7.5px">Lesión leve</span></div>
-              <div class="rh">2<br><span style="font-weight:400;font-size:7.5px">Lesión menor</span></div>
-              <div class="rh">3<br><span style="font-weight:400;font-size:7.5px">Incap. temp.</span></div>
-              <div class="rh">4<br><span style="font-weight:400;font-size:7.5px">Lesión grave</span></div>
-              <div class="rh">5<br><span style="font-weight:400;font-size:7.5px">Muerte</span></div>
-              <div class="rl">1 · Muy raro</div>
-              <div class="rc0 rt">1</div><div class="rc0 rt">2</div><div class="rc0 rt">3</div><div class="rc0 rt">4</div><div class="rc0 rto">5</div>
-              <div class="rl">2 · Poco prob.</div>
-              <div class="rc0 rt">2</div><div class="rc0 rt">4</div><div class="rc0 rto">6</div><div class="rc0 rto">8</div><div class="rc0 rm">10</div>
-              <div class="rl">3 · Posible</div>
-              <div class="rc0 rt">3</div><div class="rc0 rto">6</div><div class="rc0 rm">9</div><div class="rc0 rm">12</div><div class="rc0 ri">15</div>
-              <div class="rl">4 · Probable</div>
-              <div class="rc0 rto">4</div><div class="rc0 rm">8</div><div class="rc0 rm">12</div><div class="rc0 ri">16</div><div class="rc0 rin">20</div>
-              <div class="rl">5 · Casi seg.</div>
-              <div class="rc0 rm">5</div><div class="rc0 rm">10</div><div class="rc0 ri">15</div><div class="rc0 rin">20</div><div class="rc0 rin">25</div>
+            <p style="font-size:9px;color:var(--tx3);margin-bottom:10px">SEVERIDAD ↓ &nbsp;/&nbsp; FRECUENCIA →</p>
+            <div class="vmat">
+              <!-- Cabeceras frecuencia -->
+              <div class="vmat-h"></div>
+              <div class="vmat-h">A<br><span style="font-weight:400">Común</span></div>
+              <div class="vmat-h">B<br><span style="font-weight:400">Ha sucedido</span></div>
+              <div class="vmat-h">C<br><span style="font-weight:400">Podría suceder</span></div>
+              <div class="vmat-h">D<br><span style="font-weight:400">Raro que suceda</span></div>
+              <div class="vmat-h">E<br><span style="font-weight:400">Práct. imposible</span></div>
+              <!-- Fila 1: CATASTRÓFICO -->
+              <div class="vmat-hl">1 · Catastrófico</div>
+              <div class="vmat-c vc-r">1</div><div class="vmat-c vc-r">2</div><div class="vmat-c vc-r">4</div><div class="vmat-c vc-r">7</div><div class="vmat-c vc-o">11</div>
+              <!-- Fila 2: MORTALIDAD -->
+              <div class="vmat-hl">2 · Mortalidad</div>
+              <div class="vmat-c vc-r">3</div><div class="vmat-c vc-r">5</div><div class="vmat-c vc-r">8</div><div class="vmat-c vc-o">12</div><div class="vmat-c vc-y">16</div>
+              <!-- Fila 3: PERMANENTE -->
+              <div class="vmat-hl">3 · Permanente</div>
+              <div class="vmat-c vc-r">6</div><div class="vmat-c vc-r">9</div><div class="vmat-c vc-o">13</div><div class="vmat-c vc-y">17</div><div class="vmat-c vc-g">20</div>
+              <!-- Fila 4: TEMPORAL -->
+              <div class="vmat-hl">4 · Temporal</div>
+              <div class="vmat-c vc-o">10</div><div class="vmat-c vc-o">14</div><div class="vmat-c vc-y">18</div><div class="vmat-c vc-g">21</div><div class="vmat-c vc-a">23</div>
+              <!-- Fila 5: MENOR -->
+              <div class="vmat-hl">5 · Menor</div>
+              <div class="vmat-c vc-y">15</div><div class="vmat-c vc-y">19</div><div class="vmat-c vc-g">22</div><div class="vmat-c vc-a">24</div><div class="vmat-c vc-a">25</div>
             </div>
-            <div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:10px">
-              <span class="bdg bg">1–4 Trivial</span>
-              <span class="bdg bgr">5–8 Tolerable</span>
-              <span class="bdg ba">9–12 Moderado</span>
-              <span class="bdg br" style="opacity:.85">13–16 Importante</span>
-              <span class="bdg br">17–25 Intolerable</span>
+            <div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:11px;align-items:center">
+              <span class="vmat-c vc-r" style="border-radius:4px;padding:2px 9px;font-size:10px">1–9 Intolerable</span>
+              <span class="vmat-c vc-o" style="border-radius:4px;padding:2px 9px;font-size:10px">10–14 Importante</span>
+              <span class="vmat-c vc-y" style="border-radius:4px;padding:2px 9px;font-size:10px">15–19 Moderado</span>
+              <span class="vmat-c vc-g" style="border-radius:4px;padding:2px 9px;font-size:10px">20–22 Tolerable</span>
+              <span class="vmat-c vc-a" style="border-radius:4px;padding:2px 9px;font-size:10px">23–25 Aceptable</span>
             </div>
           </div>
         </div>
@@ -807,7 +843,17 @@ nav{flex:1;padding:5px 0;}
       <!-- INCIDENTES -->
       <div class="sso-sub" id="tab-incidentes">
         <div class="sh"><div><div style="font-size:14px;font-weight:700;color:var(--wh)">Registro de Incidentes y Casi-Accidentes</div><div class="shsub">Notificación inmediata · 24h para reporte preliminar · SPCC</div></div><button class="btn btr bsm" onclick="openM('incidente')">＋ Registrar incidente</button></div>
-        <div class="alrr">🚨 Todo incidente con tiempo perdido debe notificarse al área SSO de SPCC dentro de las 24 horas. Cuasi-accidentes y condiciones peligrosas: notificar de inmediato.</div>
+        <!-- 0 incidentes banner -->
+        <div style="background:linear-gradient(135deg,rgba(46,139,53,.12),rgba(46,139,53,.06));border:2px solid var(--gb);border-radius:9px;padding:22px 20px;text-align:center;margin-bottom:14px">
+          <div style="font-size:48px;margin-bottom:8px">🏆</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:2px;color:var(--gb);line-height:1">0 INCIDENTES REGISTRADOS</div>
+          <div style="font-size:13px;color:var(--tx2);margin-top:6px">Áreas Verdes Campamentos Cuajone · Mes en curso</div>
+          <div style="margin-top:12px;display:flex;justify-content:center;gap:14px;flex-wrap:wrap">
+            <span class="bdg bg" style="font-size:11px;padding:4px 12px">✓ Cero accidentes con tiempo perdido</span>
+            <span class="bdg bg" style="font-size:11px;padding:4px 12px">✓ Cero casi-accidentes</span>
+            <span class="bdg bg" style="font-size:11px;padding:4px 12px">✓ 67 días sin accidente</span>
+          </div>
+        </div>
         <div class="card"><div class="cb0" id="inc-list"></div></div>
       </div>
 
