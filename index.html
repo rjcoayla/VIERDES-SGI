@@ -21,10 +21,10 @@
   --r:7px;--sw:228px;--th:54px;--tr:.17s ease;--sh:0 2px 14px rgba(0,0,0,.22);
 }
 [data-theme="dark"]{
-  --bg:#06100a;--s1:#0f1d11;--s2:#141f16;--s3:#192318;
-  --b1:#1c3020;--b2:#273f2a;
-  --tx:#c8e8ca;--tx2:#74a878;--tx3:#3a5c3e;
-  --wh:#e4f2e6;--tb:#0f1d11;--ib:#141f16;
+  --bg:#030d05;--s1:#152018;--s2:#0e1810;--s3:#192a1b;
+  --b1:#2c4830;--b2:#3e6444;
+  --tx:#cceacd;--tx2:#78ae7c;--tx3:#3e6244;
+  --wh:#e6f5e8;--tb:#102014;--ib:#0e1810;
 }
 [data-theme="light"]{
   --bg:#eff7f0;--s1:#fff;--s2:#f2faf3;--s3:#e6f4e8;
@@ -234,20 +234,23 @@ nav{flex:1;padding:5px 0;}
 /* ── Activity cards: full bordered cards ── */
 .ai{
   background:var(--s1);
-  border:1.5px solid var(--b2);
-  border-radius:8px;
+  border:2px solid var(--b2);
+  border-radius:9px;
   padding:13px 14px;
-  margin-bottom:9px;
+  margin-bottom:10px;
   transition:border-color var(--tr),box-shadow var(--tr),background var(--tr);
   position:relative;
+  box-shadow:0 1px 6px rgba(0,0,0,.18);
 }
-.ai:hover{border-color:var(--g);box-shadow:0 2px 10px rgba(46,139,53,.12);background:var(--s2);}
+.ai:hover{border-color:var(--g);box-shadow:0 3px 14px rgba(46,139,53,.18);background:var(--s3);}
 .ai:last-child{margin-bottom:0;}
 /* Left accent by estado */
-.ai::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:8px 0 0 8px;background:var(--b2);}
+.ai::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:9px 0 0 9px;background:var(--b2);}
 .ai.ai-comp::before{background:var(--g);}
 .ai.ai-prog::before{background:var(--bl);}
 .ai.ai-pend::before{background:var(--am);}
+/* Clickable activity cards */
+.ai.clickable{cursor:pointer;}
 .ait{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:7px;}
 .ain{font-weight:700;font-size:13px;color:var(--wh);line-height:1.3;}
 .aim{display:flex;gap:8px;flex-wrap:wrap;margin-top:5px;}
@@ -408,7 +411,42 @@ nav{flex:1;padding:5px 0;}
 .btnxls{background:rgba(28,100,60,.12);color:#38a069;border:1px solid rgba(28,100,60,.3);padding:4px 10px;font-size:11px;font-weight:700;border-radius:4px;cursor:pointer;font-family:'Outfit',sans-serif;transition:all var(--tr);}
 .btnxls:hover{background:rgba(28,100,60,.22);}
 
-/* Responsive */
+/* ── Interactive KPI cards ── */
+.kc.clickable{cursor:pointer;}
+.kc.clickable:hover{border-color:var(--g);transform:translateY(-2px);box-shadow:0 4px 16px rgba(46,139,53,.2);}
+.kc.clickable:active{transform:translateY(0);}
+
+/* ── Bigger charts ── */
+.chwrap{position:relative;height:220px;}
+.chwrap-lg{position:relative;height:280px;}
+
+/* ── Client dashboard ── */
+.cl-dash-section{display:none;}
+.cl-dash-ot-item{
+  display:flex;align-items:center;gap:12px;
+  padding:11px 14px;border-bottom:1px solid var(--b1);
+  cursor:pointer;transition:background var(--tr);
+}
+.cl-dash-ot-item:hover{background:var(--s3);}
+.cl-dash-ot-item:last-child{border-bottom:none;}
+.cl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.cl-dot-pend{background:var(--am);}
+.cl-dot-ejec{background:var(--bl);}
+.cl-dot-comp{background:var(--g);}
+.cl-dot-apr{background:var(--pu);}
+
+/* ── Dashboard activity row (clickable mini) ── */
+.dash-act-row{
+  padding:10px 14px;border-bottom:1px solid var(--b1);
+  cursor:pointer;transition:background var(--tr);
+}
+.dash-act-row:hover{background:var(--s3);}
+.dash-act-row:last-child{border-bottom:none;}
+
+/* ── Rating panel ── */
+.rating-panel{padding:12px 14px;background:rgba(200,135,10,.06);border-top:1px solid rgba(200,135,10,.15);}
+.rating-panel-title{font-size:11px;color:var(--am);font-weight:700;margin-bottom:8px;}
+.stars-lg .star{font-size:28px;}
 @media(max-width:768px){
   #sb{transform:translateX(-100%);}
   body.sbo #sb{transform:translateX(0);box-shadow:4px 0 22px rgba(0,0,0,.4);}
@@ -475,7 +513,7 @@ nav{flex:1;padding:5px 0;}
     </div>
     <nav id="sidenav">
       <div class="ns">Principal</div>
-      <div class="ni act" data-panel="dashboard" data-roles="GERENTE,OPERACIONES"><span class="niic">📊</span> Dashboard</div>
+      <div class="ni act" data-panel="dashboard" data-roles="GERENTE,OPERACIONES,CAMPAMENTOS"><span class="niic">📊</span> Dashboard</div>
       <div class="ns">Módulos</div>
       <div class="ni" data-panel="solicitudes" data-roles="GERENTE,CAMPAMENTOS,OPERACIONES,SSO"><span class="niic">📥</span> Solicitudes OT<span class="nbdg" id="sol-badge" style="display:none">0</span></div>
       <div class="ni" data-panel="actividades" data-roles="GERENTE,CAMPAMENTOS,OPERACIONES"><span class="niic">📋</span> Actividades</div>
@@ -507,22 +545,78 @@ nav{flex:1;padding:5px 0;}
 
     <!-- ═══ DASHBOARD ═══ -->
     <div id="p-dashboard" class="panel act">
-      <div class="sh"><div><div class="shtit">Dashboard Ejecutivo</div><div class="shsub">Mina Cuajone — Áreas Verdes Campamentos</div></div></div>
-      <div class="kg">
-        <div class="kc kcg"><div class="kico">🌿</div><div class="klbl">Área mantenida</div><div class="kval">4.2</div><div class="kunit">Ha · mes actual</div></div>
-        <div class="kc kca"><div class="kico">👷</div><div class="klbl">Personal activo</div><div class="kval" id="kp">—</div><div class="kunit">presentes hoy</div></div>
-        <div class="kc kcb"><div class="kico">📋</div><div class="klbl">Actividades</div><div class="kval" id="ka">—</div><div class="kunit">en progreso / total</div></div>
-        <div class="kc kcp"><div class="kico">📥</div><div class="klbl">Solicitudes OT</div><div class="kval" id="ks">—</div><div class="kunit">pendientes / total</div></div>
-        <div class="kc kcr"><div class="kico">⚠️</div><div class="klbl">Stock crítico</div><div class="kval" id="kst">—</div><div class="kunit">ítems bajo mínimo</div></div>
-        <div class="kc kcg"><div class="kico">✅</div><div class="klbl">Cumpl. OT</div><div class="kval" id="kc2">—</div><div class="kunit">% completadas a tiempo</div></div>
+      <div class="sh"><div><div class="shtit" id="dash-title">Dashboard Ejecutivo</div><div class="shsub" id="dash-subtitle">Mina Cuajone — Áreas Verdes Campamentos</div></div></div>
+
+      <!-- KPIs internos (GERENTE, OPERACIONES) -->
+      <div id="dash-internal">
+        <div class="kg">
+          <div class="kc kcg clickable" onclick="navigateTo('actividades')"><div class="kico">🌿</div><div class="klbl">Área mantenida</div><div class="kval">4.2</div><div class="kunit">Ha · mes actual</div></div>
+          <div class="kc kca clickable" onclick="navigateTo('personal')"><div class="kico">👷</div><div class="klbl">Personal activo</div><div class="kval" id="kp">—</div><div class="kunit">presentes hoy</div></div>
+          <div class="kc kcb clickable" onclick="navigateTo('actividades')"><div class="kico">📋</div><div class="klbl">Actividades</div><div class="kval" id="ka">—</div><div class="kunit">en progreso / total</div></div>
+          <div class="kc kcp clickable" onclick="goSolFilter('')"><div class="kico">📥</div><div class="klbl">Solicitudes OT</div><div class="kval" id="ks">—</div><div class="kunit">pendientes / total</div></div>
+          <div class="kc kcr clickable" onclick="navigateTo('inventario')"><div class="kico">⚠️</div><div class="klbl">Stock crítico</div><div class="kval" id="kst">—</div><div class="kunit">ítems bajo mínimo</div></div>
+          <div class="kc kcg clickable" onclick="goSolFilter('Completada')"><div class="kico">✅</div><div class="klbl">Cumpl. OT</div><div class="kval" id="kc2">—</div><div class="kunit">% completadas a tiempo</div></div>
+        </div>
+        <div class="g2">
+          <div class="card">
+            <div class="ch"><span class="ct">Avance de Actividades</span><button class="btn btg bsm" onclick="navigateTo('actividades')">Ver todas →</button></div>
+            <div class="cb0" id="d-acts"></div>
+          </div>
+          <div class="card">
+            <div class="ch"><span class="ct">Estado de Solicitudes OT</span><button class="btn btg bsm" onclick="navigateTo('solicitudes')">Ver todas →</button></div>
+            <div class="cb"><div class="chwrap-lg"><canvas id="ch-sol"></canvas></div></div>
+          </div>
+        </div>
+        <div class="g2">
+          <div class="card">
+            <div class="ch"><span class="ct">📊 Avance General del Mes</span></div>
+            <div class="cb"><div class="chwrap-lg"><canvas id="ch-avance"></canvas></div></div>
+          </div>
+          <div class="card">
+            <div class="ch"><span class="ct">Cumplimiento OT — Tendencia</span></div>
+            <div class="cb"><div class="chwrap-lg"><canvas id="ch-cumpl"></canvas></div></div>
+          </div>
+        </div>
+        <div class="gwn">
+          <div class="card"><div class="ch"><span class="ct">⚠ Stock Crítico</span><button class="btn btg bsm" onclick="navigateTo('inventario')">Ver inventario →</button></div><div class="cb0" id="d-stk"></div></div>
+          <div class="card"><div class="ch"><span class="ct">Seguridad SSO</span></div><div class="cb" id="d-sso"></div></div>
+        </div>
       </div>
-      <div class="g2">
-        <div class="card"><div class="ch"><span class="ct">Avance de Actividades</span></div><div class="cb0" id="d-acts"></div></div>
-        <div class="card"><div class="ch"><span class="ct">Estado de Solicitudes OT</span></div><div class="cb"><div class="chwrap"><canvas id="ch-sol"></canvas></div></div></div>
-      </div>
-      <div class="gwn">
-        <div class="card"><div class="ch"><span class="ct">⚠ Stock Crítico</span></div><div class="cb0" id="d-stk"></div></div>
-        <div class="card"><div class="ch"><span class="ct">Seguridad SSO</span></div><div class="cb" id="d-sso"></div></div>
+
+      <!-- Dashboard CLIENTE SPCC (CAMPAMENTOS) -->
+      <div id="dash-cliente" style="display:none">
+        <div class="cl-hero" style="margin-bottom:18px">
+          <div>
+            <div class="chs">SPCC · Southern Peru Copper Corporation</div>
+            <div class="cht">Mi Panel de Seguimiento</div>
+            <p class="chd">Estado actualizado de todas tus solicitudes de mantenimiento de áreas verdes en Campamentos Cuajone.</p>
+          </div>
+        </div>
+        <!-- KPIs cliente -->
+        <div class="kg" style="grid-template-columns:repeat(4,1fr);margin-bottom:18px">
+          <div class="kc kcp clickable" onclick="goSolFilter('Pendiente')"><div class="kico">📥</div><div class="klbl">Mis pendientes</div><div class="kval" id="cl-kp">—</div><div class="kunit">Esperando revisión</div></div>
+          <div class="kc kcb clickable" onclick="goSolFilter('En ejecución')"><div class="kico">⚙️</div><div class="klbl">En ejecución</div><div class="kval" id="cl-ke">—</div><div class="kunit">VIERDES trabajando</div></div>
+          <div class="kc kcg clickable" onclick="goSolFilter('Completada')"><div class="kico">✅</div><div class="klbl">Completadas</div><div class="kval" id="cl-kc">—</div><div class="kunit">Trabajos terminados</div></div>
+          <div class="kc kca clickable" onclick="goSolFilter('')"><div class="kico">📋</div><div class="klbl">Total OTs</div><div class="kval" id="cl-kt">—</div><div class="kunit">Todas mis solicitudes</div></div>
+        </div>
+        <div class="g2">
+          <div class="card">
+            <div class="ch"><span class="ct">Mis Solicitudes — Estado actual</span><button class="btn btp bsm" onclick="openM('ot-new')">＋ Nueva solicitud</button></div>
+            <div class="cb"><div class="chwrap-lg"><canvas id="ch-cl-sol"></canvas></div></div>
+          </div>
+          <div class="card">
+            <div class="ch"><span class="ct">Satisfacción del servicio</span></div>
+            <div class="cb"><div class="chwrap-lg"><canvas id="ch-cl-sat"></canvas></div></div>
+          </div>
+        </div>
+        <div class="card" style="margin-bottom:14px">
+          <div class="ch"><span class="ct">🔴 Requieren tu atención</span></div>
+          <div class="cb0" id="cl-atencion"></div>
+        </div>
+        <div class="card">
+          <div class="ch"><span class="ct">Mis solicitudes recientes</span><button class="btn btg bsm" onclick="navigateTo('solicitudes')">Ver todas →</button></div>
+          <div class="cb0" id="cl-recientes"></div>
+        </div>
       </div>
     </div>
 
@@ -1003,15 +1097,15 @@ const ROLES = {
   // Visión ejecutiva: ve todo, puede calificar/comentar OTs completadas, solo lectura
   GERENTE: {
     label:'Gerente General', icon:'🏢',
-    canWrite:false, canManage:false, canRate:true, isClient:false,
+    canWrite:false, canManage:false, canRate:true, canComment:true, isClient:false,
     panels:['dashboard','solicitudes','actividades','personal','inventario'],
-    desc:'Visión ejecutiva completa + calificar trabajos'
+    desc:'Visión ejecutiva completa + calificar y comentar trabajos'
   },
   // Cliente unificado: solicita OTs, ve su progreso, califica al cierre
   CAMPAMENTOS: {
     label:'Campamentos SPCC', icon:'⛺',
-    canWrite:false, canManage:false, canRate:true, isClient:true,
-    panels:['solicitudes','actividades'],
+    canWrite:false, canManage:false, canRate:true, canComment:true, isClient:true,
+    panels:['dashboard','solicitudes','actividades'],
     desc:'Solicita trabajos, ve avance, califica cumplimiento'
   },
   // Ejecutor total: gestiona todo el flujo OT + campo + inventario + personal
@@ -1166,6 +1260,14 @@ function setupRole() {
   if (vh) vh.style.display = isClient ? 'none' : 'block';
   // SSO tabs setup
   if (curRole === 'SSO') setupSSOTabs();
+  // Dashboard mode
+  const isClient = curRole === 'CAMPAMENTOS';
+  document.getElementById('dash-internal').style.display = isClient ? 'none' : 'block';
+  document.getElementById('dash-cliente').style.display = isClient ? 'block' : 'none';
+  if (isClient) {
+    document.getElementById('dash-title').textContent = 'Mi Panel SPCC';
+    document.getElementById('dash-subtitle').textContent = 'Campamentos Cuajone — Mis solicitudes de trabajo';
+  }
   navigateTo(r.panels[0]);
   updateSolBadge();
 }
@@ -1204,7 +1306,8 @@ function toggleTheme() {
   const dk = document.documentElement.getAttribute('data-theme') === 'dark';
   document.documentElement.setAttribute('data-theme', dk ? 'light' : 'dark');
   document.getElementById('thbtn').textContent = dk ? '🌙' : '☀️';
-  [chSol, chAct].forEach(c => { if (c) c.destroy(); }); chSol = null; chAct = null;
+  [chSol, chAct, chAvance, chCumpl, chClSol, chClSat].forEach(c => { if (c) { try{c.destroy();}catch(e){} } });
+  chSol=null; chAct=null; chAvance=null; chCumpl=null; chClSol=null; chClSat=null;
   const ap = document.querySelector('.panel.act');
   if (ap) { const id = ap.id.replace('p-', ''); if (id === 'dashboard') renderDash(); if (id === 'solicitudes') renderSol(); if (id === 'actividades') renderAct(); }
 }
@@ -1445,8 +1548,11 @@ function buildOTCard(ot, isClient, isGerente, canManage, canRate) {
     if (!isComp && !isRej)
       btns += ` <button class="btn btg bxs" onclick="delOT(${ot.id})">🗑</button>`;
   } else if (!isClient) {
-    // Gerente y SSO: solo ven
+    // Gerente y SSO: ven y pueden comentar/calificar
+    const canCmt = ROLES[curRole]?.canComment;
     btns = `<button class="btn btg bsm" onclick="viewOT(${ot.id})">👁 Ver detalle</button>`;
+    if (canCmt && !isRej)
+      btns += ` <button class="btn btb bsm" onclick="openComment(${ot.id})">💬 Comentar</button>`;
     if (canRate && isComp && !ot.calificacion)
       btns += ` <button class="btn bta bsm" onclick="openRatingModal(${ot.id})">⭐ Calificar</button>`;
   }
@@ -1787,14 +1893,29 @@ function renderAct() {
   document.getElementById('ak-c').textContent=comp;document.getElementById('ak-p').textContent=prog;document.getElementById('ak-q').textContent=pend;document.getElementById('ak-a').textContent=avg+'%';
   const list=document.getElementById('act-list');if(!list)return;
   const canW=ROLES[curRole]?.canWrite;
-  list.innerHTML=acts.map(a=>{
-    const pfC=a.pct>=100?'pfg':a.pct>=50?'pfa':'pfr',bC=a.estado==='Completada'?'bg':a.estado==='En progreso'?'bb':'bgr';
-    return`<div class="ai"><div class="ait"><span class="ain">${a.nombre}</span><div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap"><span class="bdg ${bC}">${a.estado}</span>${canW?`<button class="btn btg bxs" onclick="openActEdit(${a.id})">✏️</button><button class="btn btr bxs" onclick="delAct(${a.id})">🗑</button>`:''}</div></div>
-    <div class="aipr"><div style="flex:1"><div class="pbar"><div class="pf ${pfC}" style="width:${a.pct}%"></div></div></div><span class="aipc">${a.pct}%</span></div>
-    <div class="aim"><span>📍 ${a.zona}</span><span>👤 ${a.resp}</span><span>📅 ${a.inicio||'—'} → ${a.fin||'—'}</span>${a.photos&&a.photos.length?`<span>📷 ${a.photos.length}</span>`:''}</div>
-    ${a.photos&&a.photos.length?`<div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:6px">${a.photos.slice(0,4).map(s=>`<img src="${s}" style="width:50px;height:40px;border-radius:4px;object-fit:cover;border:1px solid var(--b2);cursor:pointer" onclick="lbx('${s}')">`).join('')}</div>`:''}</div>`;
-  }).join('');
-  const ctx=document.getElementById('ch-act');if(ctx){if(chAct)chAct.destroy();const dk=document.documentElement.getAttribute('data-theme')==='dark';chAct=new Chart(ctx,{type:'doughnut',data:{labels:['Completadas','En progreso','Pendientes'],datasets:[{data:[comp,prog,pend],backgroundColor:['#2e8b35','#2e72b0','#555'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:dk?'#74a878':'#386040',font:{family:'Outfit',size:11}}}}}});}
+  list.innerHTML='<div style="padding:12px 12px 4px">'+acts.map(a=>{
+    const pfC=a.pct>=100?'pfg':a.pct>=50?'pfa':'pfr';
+    const bC=a.estado==='Completada'?'bg':a.estado==='En progreso'?'bb':'bgr';
+    const aiCls=a.estado==='Completada'?'ai-comp':a.estado==='En progreso'?'ai-prog':'ai-pend';
+    return`<div class="ai ${aiCls}">
+      <div class="ait"><span class="ain">${a.nombre}</span>
+        <div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap">
+          <span class="bdg ${bC}">${a.estado}</span>
+          ${canW?`<button class="btn btg bxs" onclick="openActEdit(${a.id})">✏️</button><button class="btn btr bxs" onclick="delAct(${a.id})">🗑</button>`:''}
+        </div>
+      </div>
+      <div class="aipr"><div style="flex:1"><div class="pbar"><div class="pf ${pfC}" style="width:${a.pct}%"></div></div></div><span class="aipc">${a.pct}%</span></div>
+      <div class="aim"><span>📍 ${a.zona}</span><span>👤 ${a.resp}</span><span>📅 ${a.inicio||'—'} → ${a.fin||'—'}</span>${a.photos&&a.photos.length?`<span>📷 ${a.photos.length}</span>`:''}</div>
+      ${a.photos&&a.photos.length?`<div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:6px">${a.photos.slice(0,4).map(s=>`<img src="${s}" style="width:50px;height:40px;border-radius:4px;object-fit:cover;border:1px solid var(--b2);cursor:pointer" onclick="lbx('${s}')">`).join('')}</div>`:''}
+    </div>`;
+  }).join('')+'</div>';
+  const ctx=document.getElementById('ch-act');
+  if(ctx){if(chAct)chAct.destroy();const dk=document.documentElement.getAttribute('data-theme')==='dark';const tc=dk?'#78ae7c':'#386040';
+    chAct=new Chart(ctx,{type:'doughnut',
+      data:{labels:['Completadas','En progreso','Pendientes'],datasets:[{data:[comp,prog,pend],backgroundColor:['#2e8b35','#2e72b0','#c8870a'],borderWidth:2,borderColor:dk?'#152018':'#fff',hoverOffset:5}]},
+      options:{responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{position:'bottom',labels:{color:tc,font:{family:'Outfit',size:11},boxWidth:10}}},
+        onClick:(e,el)=>{if(el.length){const st=['Completada','En progreso','Pendiente'][el[0].index];const flt=document.getElementById('sol-filt');if(flt)flt.value=st;}}}});}
 }
 
 // ═══════════════════════════════════════
@@ -1949,10 +2070,25 @@ function delInc(id){if(!confirm('¿Eliminar?'))return;sv('inc',ld('inc').filter(
 function saveEPP(){const i=ld('epp');i.push({id:Date.now(),trab:document.getElementById('epp-trab').value,cas:document.getElementById('epp-cas').value,len:document.getElementById('epp-len').value,gua:document.getElementById('epp-gua').value,cal:document.getElementById('epp-cal').value,car:document.getElementById('epp-car').value,mas:document.getElementById('epp-mas').value,obs:document.getElementById('epp-obs').value});sv('epp',i);closeM('epp');renderSSO();toast('EPP guardado');}
 function delEPP(id){if(!confirm('¿Eliminar?'))return;sv('epp',ld('epp').filter(x=>x.id!==id));renderSSO();}
 
+// ── Navigation helper for filtered OT view ──
+function goSolFilter(estado) {
+  navigateTo('solicitudes');
+  const filt = document.getElementById('sol-filt');
+  if (filt) { filt.value = estado; renderSol(); }
+}
+
 // ═══════════════════════════════════════
 // DASHBOARD
 // ═══════════════════════════════════════
+let chSol=null, chAct=null, chAvance=null, chCumpl=null, chClSol=null, chClSat=null;
+
 function renderDash() {
+  const isClient = curRole === 'CAMPAMENTOS';
+  if (isClient) { renderClientDash(); return; }
+  renderInternalDash();
+}
+
+function renderInternalDash() {
   const inv=ld('inv'),pers=ld('pers'),acts=ld('act'),sols=ld('sol');
   const crit=inv.filter(x=>x.stock<=x.minimo).length;
   const pres=pers.filter(p=>getAtt(p.id,todayStr())==='present').length;
@@ -1965,20 +2101,160 @@ function renderDash() {
   document.getElementById('ks').textContent=solPend+'/'+sols.length;
   document.getElementById('kst').textContent=crit;
   document.getElementById('kc2').textContent=solComp.length?Math.round(onTime/solComp.length*100)+'%':'—';
-  // Acts widget
+
+  const dk=document.documentElement.getAttribute('data-theme')==='dark';
+  const tc=dk?'#78ae7c':'#386040';
+  const gc=dk?'#2c4830':'#c8e0ca';
+
+  // Acts widget — clickable items
   const da=document.getElementById('d-acts');
-  if(da)da.innerHTML=acts.slice(0,5).map(a=>{const pfC=a.pct>=100?'pfg':a.pct>=50?'pfa':'pfr';return`<div class="ai"><div class="ait" style="margin-bottom:5px"><span style="font-size:12.5px;font-weight:600;color:var(--wh)">${a.nombre}</span><span class="aipc">${a.pct}%</span></div><div class="pbar"><div class="pf ${pfC}" style="width:${a.pct}%"></div></div></div>`;}).join('');
-  // Sol chart
+  if(da) da.innerHTML = acts.slice(0,6).map(a=>{
+    const pfC=a.pct>=100?'pfg':a.pct>=50?'pfa':'pfr';
+    const aiCls=a.estado==='Completada'?'ai-comp':a.estado==='En progreso'?'ai-prog':'ai-pend';
+    return `<div class="dash-act-row ${aiCls}" onclick="navigateTo('actividades')">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
+        <span style="font-size:12.5px;font-weight:600;color:var(--wh)">${a.nombre}</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--wh);min-width:32px;text-align:right">${a.pct}%</span>
+      </div>
+      <div class="pbar"><div class="pf ${pfC}" style="width:${a.pct}%"></div></div>
+      <div style="font-size:10px;color:var(--tx2);margin-top:4px">📍 ${a.zona} · 👤 ${a.resp}</div>
+    </div>`;
+  }).join('');
+
+  // Chart: OT Estado (bar)
   const ctx2=document.getElementById('ch-sol');
-  if(ctx2){if(chSol)chSol.destroy();const dk=document.documentElement.getAttribute('data-theme')==='dark';const tc=dk?'#74a878':'#386040';
+  if(ctx2){if(chSol)chSol.destroy();
     const states=['Pendiente','En revisión','Aprobada','Programada','En ejecución','Completada','Rechazada'];
-    chSol=new Chart(ctx2,{type:'bar',data:{labels:states,datasets:[{data:states.map(s=>sols.filter(x=>x.estado===s).length),backgroundColor:['#c8870a','#2e72b0','#2e8b35','#6e42be','#1a6090','#22a040','#b83030'],borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:tc,font:{size:9}},grid:{color:dk?'#1c3020':'#c8e0ca'}},y:{ticks:{color:tc,stepSize:1},grid:{color:dk?'#1c3020':'#c8e0ca'}}}}});}
+    const colors=['#c8870a','#2e72b0','#2e8b35','#6e42be','#1a6090','#22a040','#b83030'];
+    chSol=new Chart(ctx2,{type:'doughnut',
+      data:{labels:states,datasets:[{data:states.map(s=>sols.filter(x=>x.estado===s).length),backgroundColor:colors,borderWidth:2,borderColor:dk?'#152018':'#fff',hoverOffset:6}]},
+      options:{responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{position:'right',labels:{color:tc,font:{family:'Outfit',size:10},boxWidth:10,padding:8}},
+          tooltip:{callbacks:{label:ctx=>`${ctx.label}: ${ctx.parsed} OTs`}}},
+        onClick:(e,el)=>{if(el.length){const st=states[el[0].index];goSolFilter(st);}}}});}
+
+  // Chart: Avance general (horizontal bar)
+  const ctx3=document.getElementById('ch-avance');
+  if(ctx3){if(chAvance)chAvance.destroy();
+    chAvance=new Chart(ctx3,{type:'bar',
+      data:{labels:acts.map(a=>a.nombre.substring(0,28)+(a.nombre.length>28?'…':'')),
+        datasets:[{label:'% Avance',data:acts.map(a=>a.pct),backgroundColor:acts.map(a=>a.pct>=100?'rgba(46,139,53,.8)':a.pct>=50?'rgba(46,114,176,.8)':'rgba(200,135,10,.8)'),borderRadius:4,barThickness:14}]},
+      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.parsed.x}% completado`}}},
+        scales:{x:{min:0,max:100,ticks:{color:tc,callback:v=>v+'%'},grid:{color:gc}},
+          y:{ticks:{color:tc,font:{size:9}},grid:{display:false}}}}});}
+
+  // Chart: Cumplimiento OT (radar-style using bar)
+  const ctx4=document.getElementById('ch-cumpl');
+  if(ctx4){if(chCumpl)chCumpl.destroy();
+    const meses=['Oct','Nov','Dic','Ene','Feb','Mar'];
+    const simComp=[78,82,75,88,90,solComp.length?Math.round(onTime/solComp.length*100):0];
+    chCumpl=new Chart(ctx4,{type:'line',
+      data:{labels:meses,datasets:[
+        {label:'% A tiempo',data:simComp,borderColor:'#2e8b35',backgroundColor:'rgba(46,139,53,.12)',tension:.4,fill:true,pointBackgroundColor:'#2e8b35',pointRadius:4},
+        {label:'Meta (90%)',data:[90,90,90,90,90,90],borderColor:'rgba(200,135,10,.5)',borderDash:[5,4],pointRadius:0,fill:false}]},
+      options:{responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{labels:{color:tc,font:{family:'Outfit',size:10}}}},
+        scales:{x:{ticks:{color:tc},grid:{color:gc}},
+          y:{min:0,max:100,ticks:{color:tc,callback:v=>v+'%'},grid:{color:gc}}}}});}
+
   // Stock crítico
   const ds=document.getElementById('d-stk');
-  if(ds){const crl=inv.filter(x=>x.stock<=x.minimo);ds.innerHTML=crl.length?crl.map(x=>`<div class="ai"><div class="ait"><span style="font-size:12.5px;font-weight:600;color:var(--wh)">${x.nombre}</span><span class="bdg ${x.stock<=0?'br':'ba'}">${x.stock<=0?'Sin stock':'Bajo'}</span></div><div style="font-size:11px;color:var(--tx2);margin-top:3px">Stock: <strong style="color:var(--wh)">${x.stock} ${x.unidad}</strong> · Mín: ${x.minimo}</div></div>`).join(''):`<div style="padding:20px;text-align:center;color:var(--tx2);font-size:13px">✅ Sin alertas de stock</div>`;}
+  if(ds){const crl=inv.filter(x=>x.stock<=x.minimo);
+    ds.innerHTML=crl.length?crl.map(x=>`<div class="dash-act-row" onclick="navigateTo('inventario')">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:12.5px;font-weight:600;color:var(--wh)">${x.nombre}</span>
+        <span class="bdg ${x.stock<=0?'br':'ba'}">${x.stock<=0?'Sin stock':'Stock bajo'}</span>
+      </div>
+      <div style="font-size:11px;color:var(--tx2);margin-top:3px">Stock: <strong style="color:var(--wh)">${x.stock} ${x.unidad}</strong> · Mínimo: ${x.minimo}</div>
+    </div>`).join(''):`<div style="padding:20px;text-align:center;color:var(--tx2);font-size:13px">✅ Sin alertas de stock</div>`;}
+
   // SSO dash widget
   const dsso=document.getElementById('d-sso');
-  if(dsso){const iperc=ld('iperc'),pets=ld('pets'),inc=ld('inc');dsso.innerHTML=`<div style="display:flex;flex-direction:column;gap:10px">${[['Peligros IPERC registrados',iperc.length,'bgr'],['Riesgos intolerables',iperc.filter(x=>x.nivel==='Intolerable').length,'br'],['PETS vigentes',pets.filter(x=>x.estado==='Vigente').length+'/'+pets.length,'bg'],['Incidentes del mes',inc.length,'ba']].map(([l,v,c])=>`<div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px;color:var(--tx2)">${l}</span><span class="bdg ${c}">${v}</span></div>`).join('')}</div>`;}
+  if(dsso){const iperc=ld('iperc'),pets=ld('pets'),inc2=ld('inc');
+    dsso.innerHTML=`<div style="display:flex;flex-direction:column;gap:11px">${[
+      ['Peligros IPERC registrados',iperc.length,'bgr'],
+      ['Riesgos intolerables',iperc.filter(x=>x.nivel==='Intolerable').length,'br'],
+      ['PETS vigentes',pets.filter(x=>x.estado==='Vigente').length+'/'+pets.length,'bg'],
+      ['Incidentes del mes',inc2.length,'ba']
+    ].map(([l,v,c])=>`<div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px;color:var(--tx2)">${l}</span><span class="bdg ${c}">${v}</span></div>`).join('')}</div>`;}
+}
+
+function renderClientDash() {
+  const sols=ld('sol');
+  const pend=sols.filter(x=>['Pendiente','En revisión'].includes(x.estado)).length;
+  const ejec=sols.filter(x=>['En ejecución','Aprobada','Programada'].includes(x.estado)).length;
+  const comp=sols.filter(x=>x.estado==='Completada').length;
+  const total=sols.length;
+  const sinCal=sols.filter(x=>x.estado==='Completada'&&!x.calificacion);
+  const reabiertas=sols.filter(x=>x.reaperturaActiva);
+
+  document.getElementById('cl-kp').textContent=pend;
+  document.getElementById('cl-ke').textContent=ejec;
+  document.getElementById('cl-kc').textContent=comp;
+  document.getElementById('cl-kt').textContent=total;
+
+  const dk=document.documentElement.getAttribute('data-theme')==='dark';
+  const tc=dk?'#78ae7c':'#386040';
+
+  // Client OT donut
+  const ctx1=document.getElementById('ch-cl-sol');
+  if(ctx1){if(chClSol)chClSol.destroy();
+    chClSol=new Chart(ctx1,{type:'doughnut',
+      data:{labels:['Pendientes','En proceso','Completadas','Rechazadas'],
+        datasets:[{data:[pend,ejec,comp,sols.filter(x=>x.estado==='Rechazada').length],
+          backgroundColor:['#c8870a','#2e72b0','#2e8b35','#b83030'],borderWidth:2,borderColor:dk?'#152018':'#fff',hoverOffset:6}]},
+      options:{responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{position:'bottom',labels:{color:tc,font:{family:'Outfit',size:11},boxWidth:10}}},
+        onClick:(e,el)=>{if(el.length){const fmap=['Pendiente','En ejecución','Completada','Rechazada'];goSolFilter(fmap[el[0].index]);}}}});}
+
+  // Satisfaction radar/bar
+  const compCal=sols.filter(x=>x.calificacion>0);
+  const ctx2=document.getElementById('ch-cl-sat');
+  if(ctx2){if(chClSat)chClSat.destroy();
+    const stars=[1,2,3,4,5];
+    chClSat=new Chart(ctx2,{type:'bar',
+      data:{labels:stars.map(s=>'★'.repeat(s)),
+        datasets:[{label:'Calificaciones',data:stars.map(s=>compCal.filter(x=>x.calificacion===s).length),
+          backgroundColor:['#b83030','#c8870a','#c8a010','#2e8b35','#1a7028'],borderRadius:4}]},
+      options:{responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{display:false},title:{display:true,text:`Promedio: ${compCal.length?(compCal.reduce((s,x)=>s+x.calificacion,0)/compCal.length).toFixed(1)+' / 5':'Sin calificaciones'}`,color:tc,font:{family:'Outfit',size:12}}},
+        scales:{x:{ticks:{color:tc},grid:{display:false}},y:{ticks:{color:tc,stepSize:1},grid:{color:dk?'#2c4830':'#c8e0ca'}}}}});}
+
+  // Requieren atención (sin calificar + reabiertas)
+  const atEl=document.getElementById('cl-atencion');
+  if(atEl){
+    const items=[
+      ...sinCal.map(ot=>`<div class="cl-dash-ot-item" onclick="goSolFilter('Completada')">
+        <div class="cl-dot cl-dot-comp"></div>
+        <div style="flex:1"><strong style="color:var(--wh)">${ot.folio}</strong> — ${ot.titulo.substring(0,45)}</div>
+        <button class="btn bta bsm" onclick="event.stopPropagation();goSolFilter('Completada')">⭐ Calificar</button>
+      </div>`),
+      ...reabiertas.map(ot=>`<div class="cl-dash-ot-item" onclick="goSolFilter('')">
+        <div class="cl-dot cl-dot-pend"></div>
+        <div style="flex:1"><strong style="color:var(--wh)">${ot.folio}</strong> — ${ot.titulo.substring(0,45)}</div>
+        <span class="bdg ba">Reapertura en revisión</span>
+      </div>`)
+    ];
+    atEl.innerHTML=items.length?items.join(''):`<div style="padding:16px 14px;color:var(--tx2);font-size:12.5px">✅ Sin acciones pendientes — todo al día.</div>`;
+  }
+
+  // Recent OTs
+  const recEl=document.getElementById('cl-recientes');
+  if(recEl){
+    const BDGE={Pendiente:'ba','En revisión':'bb',Aprobada:'bg',Programada:'bp','En ejecución':'bb',Completada:'bg',Rechazada:'br'};
+    recEl.innerHTML=sols.slice(0,6).map(ot=>`<div class="cl-dash-ot-item" onclick="goSolFilter('')">
+      <div class="cl-dot ${ot.estado==='Completada'?'cl-dot-comp':ot.estado==='En ejecución'?'cl-dot-ejec':ot.estado.includes('Aprobad')||ot.estado==='Programada'?'cl-dot-apr':'cl-dot-pend'}"></div>
+      <div style="flex:1">
+        <div style="font-weight:600;color:var(--wh);font-size:13px">${ot.titulo.substring(0,50)}${ot.titulo.length>50?'…':''}</div>
+        <div style="font-size:10.5px;color:var(--tx2);margin-top:2px">📍 ${ot.zona} · 📅 Deseado: ${fd(ot.fechaDes)}</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0">
+        <span class="bdg ${BDGE[ot.estado]||'bgr'}">${ot.estado}</span>
+        ${ot.calificacion?`<span style="color:var(--am);font-size:12px">${'★'.repeat(ot.calificacion)}</span>`:''}
+      </div>
+    </div>`).join('');
+  }
 }
 
 // ═══════════════════════════════════════
