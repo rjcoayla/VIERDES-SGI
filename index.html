@@ -1261,7 +1261,6 @@ function setupRole() {
   // SSO tabs setup
   if (curRole === 'SSO') setupSSOTabs();
   // Dashboard mode
-  const isClient = curRole === 'CAMPAMENTOS';
   document.getElementById('dash-internal').style.display = isClient ? 'none' : 'block';
   document.getElementById('dash-cliente').style.display = isClient ? 'block' : 'none';
   if (isClient) {
@@ -1301,7 +1300,6 @@ document.getElementById('nav-logout').onclick = () => { if (confirm('¿Cerrar se
 // ═══════════════════════════════════════
 function toggleSB() { document.body.classList.toggle('sbo'); }
 function closeSB() { document.body.classList.remove('sbo'); }
-let chSol = null, chAct = null;
 function toggleTheme() {
   const dk = document.documentElement.getAttribute('data-theme') === 'dark';
   document.documentElement.setAttribute('data-theme', dk ? 'light' : 'dark');
