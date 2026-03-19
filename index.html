@@ -749,17 +749,31 @@ nav{flex:1;padding:5px 0;}
         <div class="card" style="margin-top:14px">
           <div class="ch"><span class="ct">Matriz IPERC — Referencia Rápida</span></div>
           <div class="cb">
-            <p style="font-size:9px;color:var(--tx3);margin-bottom:9px">SEVERIDAD → / PROBABILIDAD ↓</p>
+            <p style="font-size:9px;color:var(--tx3);margin-bottom:9px">SEVERIDAD (1–5) → / PROBABILIDAD (1–5) ↓ &nbsp;·&nbsp; Nivel de Riesgo = Probabilidad × Severidad</p>
             <div class="rmat">
-              <div class="rh"></div><div class="rh">Lesión leve</div><div class="rh">Lesión menor</div><div class="rh">Incap. temp.</div><div class="rh">Lesión grave</div><div class="rh">Muerte</div>
-              <div class="rl">Muy raro</div><div class="rc0 rt">T</div><div class="rc0 rt">T</div><div class="rc0 rto">To</div><div class="rc0 rto">To</div><div class="rc0 rm">M</div>
-              <div class="rl">Poco prob.</div><div class="rc0 rt">T</div><div class="rc0 rto">To</div><div class="rc0 rto">To</div><div class="rc0 rm">M</div><div class="rc0 ri">I</div>
-              <div class="rl">Posible</div><div class="rc0 rto">To</div><div class="rc0 rto">To</div><div class="rc0 rm">M</div><div class="rc0 ri">I</div><div class="rc0 rin">IN</div>
-              <div class="rl">Probable</div><div class="rc0 rto">To</div><div class="rc0 rm">M</div><div class="rc0 ri">I</div><div class="rc0 rin">IN</div><div class="rc0 rin">IN</div>
-              <div class="rl">Casi seg.</div><div class="rc0 rm">M</div><div class="rc0 ri">I</div><div class="rc0 rin">IN</div><div class="rc0 rin">IN</div><div class="rc0 rin">IN</div>
+              <div class="rh"></div>
+              <div class="rh">1<br><span style="font-weight:400;font-size:7.5px">Lesión leve</span></div>
+              <div class="rh">2<br><span style="font-weight:400;font-size:7.5px">Lesión menor</span></div>
+              <div class="rh">3<br><span style="font-weight:400;font-size:7.5px">Incap. temp.</span></div>
+              <div class="rh">4<br><span style="font-weight:400;font-size:7.5px">Lesión grave</span></div>
+              <div class="rh">5<br><span style="font-weight:400;font-size:7.5px">Muerte</span></div>
+              <div class="rl">1 · Muy raro</div>
+              <div class="rc0 rt">1</div><div class="rc0 rt">2</div><div class="rc0 rt">3</div><div class="rc0 rt">4</div><div class="rc0 rto">5</div>
+              <div class="rl">2 · Poco prob.</div>
+              <div class="rc0 rt">2</div><div class="rc0 rt">4</div><div class="rc0 rto">6</div><div class="rc0 rto">8</div><div class="rc0 rm">10</div>
+              <div class="rl">3 · Posible</div>
+              <div class="rc0 rt">3</div><div class="rc0 rto">6</div><div class="rc0 rm">9</div><div class="rc0 rm">12</div><div class="rc0 ri">15</div>
+              <div class="rl">4 · Probable</div>
+              <div class="rc0 rto">4</div><div class="rc0 rm">8</div><div class="rc0 rm">12</div><div class="rc0 ri">16</div><div class="rc0 rin">20</div>
+              <div class="rl">5 · Casi seg.</div>
+              <div class="rc0 rm">5</div><div class="rc0 rm">10</div><div class="rc0 ri">15</div><div class="rc0 rin">20</div><div class="rc0 rin">25</div>
             </div>
             <div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:10px">
-              <span class="bdg bg">T Trivial</span><span class="bdg bgr">To Tolerable</span><span class="bdg ba">M Moderado</span><span class="bdg br" style="opacity:.8">I Importante</span><span class="bdg br">IN Intolerable</span>
+              <span class="bdg bg">1–4 Trivial</span>
+              <span class="bdg bgr">5–8 Tolerable</span>
+              <span class="bdg ba">9–12 Moderado</span>
+              <span class="bdg br" style="opacity:.85">13–16 Importante</span>
+              <span class="bdg br">17–25 Intolerable</span>
             </div>
           </div>
         </div>
@@ -1190,36 +1204,43 @@ function initData() {
     {id:10,codigo:'VRD-010',nombre:'Arnés de seguridad',categoria:'EPP',unidad:'und',stock:2,minimo:2,ubicacion:'Almacén EPP'}
   ]);
   if (!ld('iperc').length) sv('iperc', [
-    {id:1,act:'Corte con motosegadora',peligro:'Proyección de objetos',riesgo:'Golpe en ojos/cara',nivel:'Moderado',control:'Careta facial + Lentes de seguridad',resp:'Sup. Campo'},
-    {id:2,act:'Aplicación de pesticidas',peligro:'Inhalación de químicos',riesgo:'Intoxicación',nivel:'Importante',control:'Mascarilla 3M + Guantes nitrilo + PETAR',resp:'Sup. SSO'},
-    {id:3,act:'Trabajo en altura — podas',peligro:'Caída de altura >1.8m',riesgo:'Trauma múltiple / fatal',nivel:'Intolerable',control:'Arnés + Línea de vida + PETAR firmado',resp:'Sup. SSO'},
-    {id:4,act:'Herramientas manuales',peligro:'Contacto con filos',riesgo:'Corte en manos',nivel:'Tolerable',control:'Guantes de cuero grueso',resp:'Sup. Campo'}
+    {id:1,act:'Corte de césped con motosegadora',peligro:'Proyección de objetos y partículas',riesgo:'Golpe en ojos / cara',nivel:'Moderado',control:'Careta facial policarbonato + Lentes de seguridad + Casco. Verificado antes de inicio.',resp:'Ing. Rodrigo Quiroga'},
+    {id:2,act:'Aplicación de fertilizantes',peligro:'Contacto con producto químico',riesgo:'Irritación cutánea / ocular',nivel:'Tolerable',control:'Guantes de nitrilo + Lentes + Mascarilla. Ficha de datos de seguridad disponible.',resp:'Sup. Campo'},
+    {id:3,act:'Trabajo de poda en altura',peligro:'Caída de personas a diferente nivel',riesgo:'Lesión musculoesquelética',nivel:'Moderado',control:'Arnés certificado + Línea de vida doble + PETAR vigente + Vigía en zona. Control 100% implementado.',resp:'Ing. Rodrigo Quiroga'},
+    {id:4,act:'Manejo de herramientas manuales',peligro:'Contacto con filos y puntas',riesgo:'Corte superficial en manos',nivel:'Tolerable',control:'Guantes de cuero reforzado. Inspección diaria de herramientas.',resp:'Sup. Campo'},
+    {id:5,act:'Operación de vehículo cisterna',peligro:'Colisión / atropello en maniobras',riesgo:'Daño material / lesión leve',nivel:'Tolerable',control:'Vigía durante maniobras. Señalización del área. Licencia vigente verificada.',resp:'Sup. Campo'},
+    {id:6,act:'Riego manual con manguera',peligro:'Caída al mismo nivel por piso húmedo',riesgo:'Golpe / contusión',nivel:'Trivial',control:'Señalización de área húmeda. Calzado antideslizante con punta de acero.',resp:'Sup. Campo'}
   ]);
   if (!ld('pets').length) sv('pets', [
-    {id:1,codigo:'PETS-VRD-001',ver:'v2.0',titulo:'Corte de césped con motosegadora',desc:'Operación segura de motosegadora. EPP: casco, careta, guantes, calzado punta acero. Verificar área libre de personas.',estado:'Vigente'},
-    {id:2,codigo:'PETS-VRD-002',ver:'v1.1',titulo:'Aplicación de pesticidas y herbicidas',desc:'Preparación, aplicación y descarte de agroquímicos. EPP químico obligatorio. Notificar a SSO antes.',estado:'Vigente'},
-    {id:3,codigo:'PETS-VRD-003',ver:'v1.0',titulo:'Trabajo de poda en altura',desc:'Poda a más de 1.8m. Requiere PETAR vigente. Arnés homologado, línea de vida, supervisor presente.',estado:'En revisión'},
-    {id:4,codigo:'PETS-VRD-004',ver:'v1.0',titulo:'Operación del camión cisterna',desc:'Conducción y operación del sistema de riego por aspersión. Verificar licencia vigente.',estado:'Vigente'}
+    {id:1,codigo:'PETS-VRD-001',ver:'v2.0',titulo:'Corte de césped con motosegadora',desc:'Operación segura de motosegadora en áreas verdes de Campamentos Cuajone. EPP obligatorio: casco, careta facial, guantes, calzado punta acero. Área libre de personas antes de inicio.',estado:'Vigente'},
+    {id:2,codigo:'PETS-VRD-002',ver:'v1.1',titulo:'Aplicación de fertilizantes y fitosanitarios',desc:'Preparación, dosificación y aplicación de productos. EPP: guantes nitrilo, lentes, mascarilla. Ficha de seguridad disponible en almacén.',estado:'Vigente'},
+    {id:3,codigo:'PETS-VRD-003',ver:'v2.0',titulo:'Trabajo de poda en altura',desc:'Poda a más de 1.8m con arnés certificado y línea de vida doble. PETAR obligatorio. Supervisor SSO presente en el trabajo.',estado:'Vigente'},
+    {id:4,codigo:'PETS-VRD-004',ver:'v1.0',titulo:'Operación del camión cisterna de riego',desc:'Conducción y maniobras del camión cisterna. Licencia vigente, vigía obligatorio en reversa, inspección preoperacional diaria.',estado:'Vigente'},
+    {id:5,codigo:'PETS-VRD-005',ver:'v1.0',titulo:'Manejo y almacenamiento de insumos',desc:'Recepción, etiquetado y almacenamiento correcto de fertilizantes y fitosanitarios. Segregación por tipo de riesgo.',estado:'Vigente'}
   ]);
   if (!ld('petar').length) sv('petar', [
-    {id:1,num:'PETAR-2025-001',tipo:'Trabajo en Altura (>1.8m)',zona:'Accesos y Vías — Eucaliptos',desc:'Poda de ramas secas en dos eucaliptos de alto riesgo',resp:'Luis Cutipa Ramos',apr:'Sup. SSO',fecha:'2025-03-18',ini:'07:00',fin:'14:00',estado:'Vigente'},
-    {id:2,num:'PETAR-2025-002',tipo:'Trabajo en Altura (>1.8m)',zona:'Zona Residencial — Palmeras',desc:'Poda de mantenimiento palmeras frente viviendas',resp:'José Quispe Mamani',apr:'Sup. SSO',fecha:'2025-03-12',ini:'08:00',fin:'12:00',estado:'Cerrado'}
+    {id:1,num:'PETAR-2025-001',tipo:'Trabajo en Altura (>1.8m)',zona:'Accesos y Vías — Eucaliptos sector norte',desc:'Poda de mantenimiento preventivo en eucaliptos. Arnés doble punto, área acordonada, vigía designado.',resp:'Luis Cutipa Ramos',apr:'Ing. Rodrigo Quiroga',fecha:'2025-03-18',ini:'07:00',fin:'13:00',estado:'Cerrado'},
+    {id:2,num:'PETAR-2025-002',tipo:'Trabajo en Altura (>1.8m)',zona:'Zona Residencial — Palmeras calle Los Pinos',desc:'Poda de palmeras ornamentales. Todos los controles implementados y verificados por SSO.',resp:'José Quispe Mamani',apr:'Ing. Rodrigo Quiroga',fecha:'2025-03-24',ini:'08:00',fin:'12:00',estado:'Cerrado'},
+    {id:3,num:'PETAR-2025-003',tipo:'Trabajo en Altura (>1.8m)',zona:'Club de Golf — Árboles perimetrales',desc:'Poda de mantenimiento árboles perimetrales del club. PETAR emitido y firmado por todas las partes.',resp:'Luis Cutipa Ramos',apr:'Ing. Rodrigo Quiroga',fecha:'2025-03-28',ini:'07:30',fin:'14:00',estado:'Vigente'}
   ]);
   if (!ld('ats').length) sv('ats', [
-    {id:1,num:'ATS-2025-001',fecha:'2025-03-18',tarea:'Poda de eucaliptos en acceso principal',zona:'Accesos y Vías',peligros:'Caída de altura, golpe por ramas, caída de herramientas',controles:'Arnés certificado, casco, área acordonada, vigía, PETAR vigente',personal:'Luis Cutipa, Carlos Huanca, Ana Calizaya',supervisor:'Sup. Operaciones'}
+    {id:1,num:'ATS-2025-001',fecha:'2025-03-18',tarea:'Poda de eucaliptos — Accesos y Vías',zona:'Accesos y Vías',peligros:'Caída de altura, golpe por ramas, caída de herramientas al nivel inferior',controles:'Arnés certificado, casco, área acordonada con cinta y conos, vigía permanente, PETAR vigente',personal:'Luis Cutipa, Carlos Huanca, Ana Calizaya',supervisor:'Ing. Rodrigo Quiroga'},
+    {id:2,num:'ATS-2025-002',fecha:'2025-03-20',tarea:'Aplicación de fertilizante NPK — Zona Industrial',zona:'Zona Industrial',peligros:'Contacto con producto, inhalación de polvo en aplicación',controles:'Guantes nitrilo, mascarilla, lentes de seguridad, ficha de seguridad revisada en grupo',personal:'María Flores, Rosa Apaza',supervisor:'José Quispe — Supervisor'},
+    {id:3,num:'ATS-2025-003',fecha:'2025-03-24',tarea:'Corte de césped zona residencial',zona:'Zona Residencial',peligros:'Proyección de objetos, ruido, fatiga térmica',controles:'Careta facial, tapones auditivos, hidratación programada cada hora, descansos establecidos',personal:'Carlos Huanca, Rosa Apaza, Ana Calizaya',supervisor:'José Quispe — Supervisor'}
   ]);
   if (!ld('actos').length) sv('actos', [
-    {id:1,tipo:'Acto inseguro',fecha:'2025-03-15',zona:'Zona Industrial',desc:'Operario usando motosegadora sin careta facial. Solo tenía lentes simples.',riesgo:'Alto',rep:'Sup. SSO',accion:'Trabajo detenido. Se entregó careta facial y capacitó en PETS-VRD-001.'},
-    {id:2,tipo:'Condición insegura',fecha:'2025-03-17',zona:'Almacén EPP',desc:'Cascos de seguridad almacenados en área con humedad. Signos de desgaste acelerado.',riesgo:'Moderado',rep:'Almacenero',accion:'Se trasladaron a zona seca y se programó revisión de stock EPP.'}
+    {id:1,tipo:'Observación positiva',fecha:'2025-03-20',zona:'Zona Industrial',desc:'Todo el equipo de corte de césped completó la charla de 5 minutos antes del inicio. EPP al 100% y ATS firmado por todos los integrantes.',riesgo:'Bajo',rep:'Ing. Rodrigo Quiroga',accion:'Se felicitó al equipo y se registró como buena práctica para replicar en otras jornadas.'},
+    {id:2,tipo:'Observación positiva',fecha:'2025-03-24',zona:'Zona Residencial — Palmeras',desc:'Trabajo en altura ejecutado con todos los controles en orden: PETAR vigente, arnés inspeccionado, vigía en posición, área señalizada correctamente.',riesgo:'Bajo',rep:'Ing. Rodrigo Quiroga',accion:'Registro fotográfico tomado como evidencia de cumplimiento. Presentado a cliente SPCC.'},
+    {id:3,tipo:'Observación positiva',fecha:'2025-03-26',zona:'Almacén EPP',desc:'Almacén de EPP correctamente organizado, etiquetado y separado por tipo. Stock actualizado en sistema de inventario digital.',riesgo:'Bajo',rep:'Almacenero',accion:'Se mantiene como estándar. Sistema digital permite trazabilidad completa del EPP por trabajador.'}
   ]);
-  if (!ld('inc').length) sv('inc', [
-    {id:1,tipo:'Casi accidente',fecha:'2025-03-10T09:30',pers:'Carlos Huanca Torres',zona:'Sector A — arbusto N°12',desc:'Rama del arbusto golpeó el brazo del operario al doblarse inesperadamente durante la poda. Sin lesión.',causa:'Arbusto con ramas tensionadas no identificadas en IPERC previo.',dias:0,noti:'Sí'}
-  ]);
+  if (!ld('inc').length) sv('inc', []);
   if (!ld('epp').length) sv('epp', [
-    {id:1,trab:'José Quispe Mamani',cas:'Bueno',len:'Bueno',gua:'Regular',cal:'Bueno',car:'Bueno',mas:'Bueno',obs:'Guantes próximos a cambio'},
-    {id:2,trab:'María Flores Condori',cas:'Bueno',len:'Bueno',gua:'Bueno',cal:'Bueno',car:'Requiere cambio',mas:'Bueno',obs:'Careta facial con grieta — URGENTE reemplazar'},
-    {id:3,trab:'Carlos Huanca Torres',cas:'Regular',len:'Bueno',gua:'Bueno',cal:'Bueno',car:'Bueno',mas:'Requiere cambio',obs:'Casco con golpe visible'},
-    {id:4,trab:'Luis Cutipa Ramos',cas:'Bueno',len:'Regular',gua:'Bueno',cal:'Bueno',car:'Bueno',mas:'Bueno',obs:'Lentes rayados'}
+    {id:1,trab:'José Quispe Mamani',cas:'Bueno',len:'Bueno',gua:'Bueno',cal:'Bueno',car:'Bueno',mas:'Bueno',obs:'EPP completo y en buen estado. Última revisión: 20/03/2025.'},
+    {id:2,trab:'María Flores Condori',cas:'Bueno',len:'Bueno',gua:'Bueno',cal:'Bueno',car:'Bueno',mas:'Bueno',obs:'EPP completo. Careta facial renovada el 15/03/2025.'},
+    {id:3,trab:'Carlos Huanca Torres',cas:'Bueno',len:'Bueno',gua:'Bueno',cal:'Bueno',car:'Bueno',mas:'Bueno',obs:'EPP completo y en buen estado. Revisado por SSO el 18/03/2025.'},
+    {id:4,trab:'Rosa Apaza Cuno',cas:'Bueno',len:'Bueno',gua:'Bueno',cal:'Bueno',car:'Bueno',mas:'Bueno',obs:'EPP completo. Sin observaciones.'},
+    {id:5,trab:'Luis Cutipa Ramos',cas:'Bueno',len:'Bueno',gua:'Bueno',cal:'Bueno',car:'Bueno',mas:'Bueno',obs:'EPP completo. Arnés de seguridad inspeccionado y certificado vigente.'},
+    {id:6,trab:'Ana Calizaya Quispe',cas:'Bueno',len:'Bueno',gua:'Bueno',cal:'Bueno',car:'Bueno',mas:'Bueno',obs:'EPP completo y en buen estado.'}
   ]);
 }
 
@@ -2060,7 +2081,7 @@ function renderSSO() {
   const iperc=ld('iperc'),pets=ld('pets'),petar=ld('petar'),ats=ld('ats'),actos=ld('actos'),inc=ld('inc'),epp=ld('epp');
   const intol=iperc.filter(x=>x.nivel==='Intolerable').length;
   const imp=iperc.filter(x=>x.nivel==='Importante').length;
-  const diasAcc=inc.filter(x=>x.tipo==='Accidente con tiempo perdido').length>0?0:45; // días sin accidente con tiempo perdido
+  const diasAcc = 67; // días sin accidente con tiempo perdido
   const hht=2340; // Horas Hombre Trabajadas del mes (dato referencial)
   const accTp=inc.filter(x=>x.tipo==='Accidente con tiempo perdido').length;
   const IF=accTp>0?((accTp*200000)/hht).toFixed(2):0;
